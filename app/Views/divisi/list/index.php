@@ -7,7 +7,7 @@
 
     <div class="d-flex mb-0">
         <div class="me-auto mb-1">
-            <h3 style="color: #566573;">Data Karyawan</h3>
+            <h3 style="color: #566573;">Data </h3>
         </div>
         <div class="me-2 mb-1">
             <a class="btn btn-sm btn-outline-dark" href="<?= site_url() ?>divisi">
@@ -47,7 +47,7 @@
                         <td><?= $karyawan['no_telp'] ?></td>
                         <td><?= $karyawan['email'] ?></td>
                         <td class="text-center">
-                            <a title="Detail" class="px-2 py-0 btn btn-sm btn-outline-dark" onclick="showModalDetail()">
+                            <a title="Detail" class="px-2 py-0 btn btn-sm btn-outline-dark" onclick="showModalDetail(<?= $karyawan['id'] ?>)">
                                 <i class="fa-fw fa-solid fa-magnifying-glass"></i>
                             </a>
                         </td>
@@ -62,7 +62,6 @@
 </main>
 
 <?= $this->include('MyLayout/js') ?>
-
 
 
 <!-- Modal -->
@@ -82,7 +81,6 @@
 <!-- Modal -->
 
 
-
 <script>
 
     // Bahan Alert
@@ -100,40 +98,6 @@
             toast.addEventListener('mouseleave', Swal.resumeTimer)
         }
     })
-
-    // $($document).ready(function(id){
-    //     $('#table').DataTable({
-    //         processing: true,
-    //         serverSide: true,
-    //         ajax: '<?= site_url() ?>getdatalist'+id,
-    //         order: [],
-    //         columns: [{
-    //                 data: 'no',
-    //                 orderable: false
-    //             },
-    //             {
-    //                 data: 'nama_lengkap'
-    //             },
-    //             {
-    //                 data: 'jabatan'
-    //             },
-    //             {
-    //                 data: 'pendidikan'
-    //             },
-    //             {
-    //                 data: 'no_telp'
-    //             },
-    //             {
-    //                 data: 'email'
-    //             },
-    //             {
-    //                 data: 'aksi',
-    //                 orderable: false,
-    //                 className: 'text-center'
-    //             },
-    //         ]
-    //     })
-    // });
         
 
     $(document).ready(function() {
@@ -154,11 +118,12 @@
         e.preventDefault();
         showModalTambah();
     })
+    
 
     function showModalTambah() {
         $.ajax({
             type: 'GET',
-            url: '<?= site_url() ?>list/new',
+            url: '<?= site_url() ?>list-new',
             dataType: 'json',
             success: function(res) {
                 if (res.data) {
@@ -177,15 +142,13 @@
     function showModalDetail(id) {
         $.ajax({
             type: 'GET',
-            url: '<?= site_url() ?>detail-karyawan/' + id,
+            url: '<?= site_url() ?>karyawan/' + id,
             dataType: 'json',
             success: function(res) {
                 if (res.data) {
                     $('#isiForm').html(res.data)
                     $('#my-modal').modal('toggle')
                     $('#judulModal').html('Detail Karyawan')
-                } else {
-                    console.log(res)
                 }
             },
             error: function(e) {
@@ -207,11 +170,13 @@
             confirmButtonText: 'Ya, hapus!'
         }).then((result) => {
             if (result.isConfirmed) {
-                $('#form_delete').attr('action', '<?= site_url() ?>list/' + id);
+                $('#form_delete').attr('action', '<?= site_url() ?>list-delete/' + id);
                 $('#form_delete').submit();
             }
         })
     }
+
+    
 </script>
 
 <?= $this->endSection() ?>

@@ -30,16 +30,18 @@ $routes->set404Override();
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 
-$routes->get('/', 'AuthController::login');
+    $routes->get('/', 'AuthController::login');
 
-$routes->group('', ['filter' => 'isLoggedIn'], function ($routes) {
+    $routes->group('', ['filter' => 'isLoggedIn'], function ($routes) {
 
     $routes->get('/dashboard', 'Dashboard::index', ['filter' => 'permission:Dashboard']);
+
 
     // GetData
     $routes->get('/wilayah/kota_by_provinsi', 'GetWilayah::KotaByProvinsi');
     $routes->get('/wilayah/kecamatan_by_kota', 'GetWilayah::KecamatanByKota');
     $routes->get('/wilayah/kelurahan_by_kecamatan', 'GetWilayah::KelurahanByKecamatan');
+
 
     // Karyawan
     $routes->get('karyawan/redirect/(:any)', 'Karyawan::redirect/$1', ['filter' => 'permission:SDM']);
@@ -50,12 +52,16 @@ $routes->group('', ['filter' => 'isLoggedIn'], function ($routes) {
     $routes->get('divisi/redirect/(:any)', 'Divisi::redirect/$1', ['filter' => 'permission:SDM']);
     $routes->resource('divisi', ['filter' => 'permission:SDM']);
 
+
     //list
     $routes->get('list/(:num)', 'DivisiList::index/$1', ['filter' => 'permission:SDM']);
     $routes->get('detail-karyawan/(:num)', 'DivisiList::show/$1', ['filter' => 'permission:SDM']);
-    $routes->get('insert-list/(:num)', 'DivisiList::create/$1', ['filter' => 'permission:SDM']);
-    $routes->get('list/new', 'DivisiList::new', ['filter' => 'permission:SDM']);
-    $routes->get('getdatalist/(:num)', 'DivisiList::getDataList/$1', ['filter' => 'permission:SDM']);
+    $routes->post('list/create', 'DivisiList::create', ['filter' => 'permission:SDM']);
+    $routes->get('list-new', 'DivisiList::new', ['filter' => 'permission:SDM']);
+    $routes->delete('list-delete/(:num)', 'DivisiList::delete/$1', ['filter' => 'permission:SDM']);
+    
+
+    
 
     
 });

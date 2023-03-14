@@ -379,9 +379,4 @@ class Karyawan extends ResourceController
         session()->setFlashdata('pesan', 'Data berhasil dihapus.');
         return redirect()->to('/karyawan');
     }
-
-
-    
-
-
 }
