@@ -17,7 +17,7 @@ class DivisiList extends ResourceController
         $modelKaryawan = new KaryawanModel();
         $modelDivisi = new DivisiModel();
         $karyawan = $modelKaryawan
-        ->select('karyawan.id_divisi,karyawan.id,karyawan.nama_lengkap, karyawan.jabatan, karyawan.pendidikan, karyawan.no_telp, karyawan.email')
+        ->select('karyawan_divisi.id,karyawan.id_divisi,karyawan.id,karyawan.nama_lengkap, karyawan.jabatan, karyawan.pendidikan, karyawan.no_telp, karyawan.email')
         ->join('karyawan_divisi', 'karyawan_divisi.id_karyawan = karyawan.id')
         ->where('karyawan_divisi.id_divisi', $id_divisi)
         ->findAll();        
@@ -77,21 +77,11 @@ class DivisiList extends ResourceController
     public function create()
     {
         if ($this->request->isAJAX()) {
-            $modelKaryawan = new KaryawanModel();
-            $modelDivisi = new DivisiModel();
-            $modelKaryawanDivisi = new KaryawanDivisiModel();
-
             $validasi = [
                 'karyawan'  => [
                     'rules'     => 'required',
                     'errors'    => [
                         'required' => 'karyawan harus diisi',
-                    ]
-                ],
-                'divisi'  => [
-                    'rules'     => 'required',
-                    'errors'    => [
-                        'required' => 'divisi lengkap harus diisi',
                     ]
                 ],
             ];
@@ -101,7 +91,6 @@ class DivisiList extends ResourceController
 
                 $error = [
                     'error_karyawan' => $validation->getError('karyawan'),
-                    'error_divisi' => $validation->getError('divisi'),
                 ];
 
                 $json = [
@@ -109,9 +98,14 @@ class DivisiList extends ResourceController
                 ];
             }
             else {
+                $modelKaryawan = new KaryawanModel();
+                $modelDivisi = new DivisiModel();
+                $modelKaryawanDivisi = new KaryawanDivisiModel();
+                
                 $data = [
-                    'id_divisi' => $this->request->getPost('divisi'),
                     'id_karyawan' => $this->request->getPost('karyawan'),
+                    'id_divisi'   => $this->request->getPost('divisi'),
+                    // 'id_divisi'   => $modelDivisi->getInsertID(),
                 ];
                 $modelKaryawanDivisi->save($data);
                 $json = [

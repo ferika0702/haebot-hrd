@@ -55,12 +55,24 @@ $routes->set404Override();
 
     //list
     $routes->get('list/(:num)', 'DivisiList::index/$1', ['filter' => 'permission:SDM']);
-    $routes->get('detail-karyawan/(:num)', 'DivisiList::show/$1', ['filter' => 'permission:SDM']);
+    $routes->get('detail-karyawan/', 'DivisiList::show/', ['filter' => 'permission:SDM']);
     $routes->post('list/create', 'DivisiList::create', ['filter' => 'permission:SDM']);
     $routes->get('list-new', 'DivisiList::new', ['filter' => 'permission:SDM']);
     $routes->delete('list-delete/(:num)', 'DivisiList::delete/$1', ['filter' => 'permission:SDM']);
-    
 
+    
+    //group
+    $routes->get('group/(:num)', 'ListGroup::index/$1', ['filter' => 'permission:SDM']);
+    $routes->post('group/create', 'ListGroup::create', ['filter' => 'permission:SDM']);
+    $routes->get('group-new', 'ListGroup::new', ['filter' => 'permission:SDM']);
+
+    //permission
+    $routes->get('permission/(:num)', 'Permission::index/$1', ['filter' => 'permission:SDM']);
+    $routes->post('permission/create', 'Permission::create', ['filter' => 'permission:SDM']);
+    $routes->get('permission-new', 'Permission::new', ['filter' => 'permission:SDM']);
+
+    //user
+    $routes->resource('user', ['filter' => 'permission:SDM']);
     
 
     
