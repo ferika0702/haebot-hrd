@@ -7,16 +7,16 @@
 
     <div class="d-flex mb-0">
         <div class="me-auto mb-1">
-            <h3 style="color: #566573;">Data Karyawan</h3>
+            <h3 style="color: #566573;">Data Permission</h3>
         </div>
         <div class="me-2 mb-1">
-            <a class="btn btn-sm btn-outline-dark" href="<?= site_url() ?>divisi">
+            <a class="btn btn-sm btn-outline-dark" href="<?= site_url() ?>user-permission-view">
                 <i class="fa-fw fa-solid fa-arrow-left"></i> Kembali
             </a>
         </div>
         <div class="mb-1">
             <a class="btn btn-sm btn-outline-secondary mb-3" id="tombolTambah">
-                <i class="fa-fw fa-solid fa-plus"></i> Tambah Karyawan
+                <i class="fa-fw fa-solid fa-plus"></i> Tambah Permission
             </a>
         </div>
     </div>
@@ -28,41 +28,29 @@
             <thead>
                 <tr>
                     <th class="text-center" width="5%">No</th>
-                    <th class="text-center" width="30%">Nama</th>
-                    <th class="text-center" width="10%">Jabatan</th>
-                    <th class="text-center" width="10%">Pendidikan</th>
-                    <th class="text-center" width="10%">No Telepon</th>
-                    <th class="text-center" width="20%">Email</th>
+                    <th class="text-center" width="30%">Nama Grup</th>
+                    <th class="text-center" width="25%">Deskripis</th>
                     <th class="text-center" width="15%">Aksi</th>
                 </tr>
             </thead>
             <tbody>
             <?php $no = 1 ?>
-                <?php foreach ($karyawan as $karyawan) : ?>
+                <?php foreach ($user as $user) : ?>
                     <tr>
                         <td><?= $no++ ?></td>
-                        <td><?= $karyawan['nama_lengkap'] ?></td>
-                        <td><?= $karyawan['jabatan'] ?></td>
-                        <td><?= $karyawan['pendidikan'] ?></td>
-                        <td><?= $karyawan['no_telp'] ?></td>
-                        <td><?= $karyawan['email'] ?></td>
+                        <td><?= $user['name'] ?></td>
+                        <td><?= $user['description'] ?></td>
                         <td class="text-center">
-                            <a title="Detail" class="px-2 py-0 btn btn-sm btn-outline-dark" onclick="showModalDetail(<?= $karyawan['id_karyawan'] ?>)">
-                                <i class="fa-fw fa-solid fa-magnifying-glass"></i>
-                            </a>
-                            <form id="form_delete" method="POST" class="d-inline">
-
-                                <input type="hidden" name="_method" value="DELETE">
-                            </form>
-
-                            <button onclick="confirm_delete(<?= $karyawan['id'] ?>)" title="Hapus" type="button" class="px-2 py-0 btn btn-sm btn-outline-danger">
-                                <i class="fa-fw fa-solid fa-trash"></i>
-                            </button>
+                        <form id="form_delete" method="POST" class="d-inline">
+                            <input type="hidden" name="_method" value="DELETE">
+                        </form>
+                        <button onclick="confirm_delete(<?= $user['permission_id']?>,<?=$id_user?>)" title="Hapus" type="button" class="px-2 py-0 btn btn-sm btn-outline-danger">
+                        <i class="fa-fw fa-solid fa-trash"></i>
+                        </button>
                         </td>
                     </tr>
                 <?php endforeach; ?>
                 </tr>
-
             </tbody>
         </table>
     </div>
@@ -77,7 +65,7 @@
     <div class="modal-dialog modal-lg modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="judulModal">Tambah Karyawan</h1>
+                <h1 class="modal-title fs-5" id="judulModal">Tambah user</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body" id="isiForm">
@@ -124,20 +112,21 @@
 
     $('#tombolTambah').click(function(e) {
         e.preventDefault();
-        showModalTambah(<?= $id_divisi; ?>);
+        showModalTambah(<?=$id_user?>);
     })
     
 
     function showModalTambah(id) {
         $.ajax({
-            type: 'GET',
-            url: '<?= site_url() ?>list-new/'+id,
+            type: 'POST',
+            url: '<?= site_url() ?>permission-new',
+            data: 'id='+id,
             dataType: 'json',
             success: function(res) {
                 if (res.data) {
                     $('#isiForm').html(res.data)
                     $('#my-modal').modal('toggle')
-                    $('#judulModal').html('Tambah Karyawan')
+                    $('#judulModal').html('Tambah permission')
                 }
             },
             error: function(e) {
@@ -147,27 +136,9 @@
     }
 
 
-    function showModalDetail(id) {
-        $.ajax({
-            type: 'GET',
-            url: '<?= site_url() ?>detail-list/' + id,
-            dataType: 'json',
-            success: function(res) {
-                if (res.data) {
-                    $('#isiForm').html(res.data)
-                    $('#my-modal').modal('toggle')
-                    $('#judulModal').html('Detail Karyawan')
-                }
-            },
-            error: function(e) {
-                alert('Error \n' + e.responseText);
-            }
-        })
-    }
-
-
-    function confirm_delete(id) {
+    function confirm_delete(permission_id,user_id) {
         Swal.fire({
+            backdrop: false,
             title: 'Konfirmasi?',
             text: "Apakah yakin menghapus!",
             icon: 'warning',
@@ -177,7 +148,7 @@
             confirmButtonText: 'Ya, hapus!'
         }).then((result) => {
             if (result.isConfirmed) {
-                $('#form_delete').attr('action', '<?= site_url() ?>list-delete/'+id);
+                $('#form_delete').attr('action', '<?= site_url() ?>user-permission/'+permission_id+'/'+user_id);
                 $('#form_delete').submit();
             }
         })

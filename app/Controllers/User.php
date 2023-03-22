@@ -80,4 +80,36 @@ class User extends ResourceController
     {
         //
     }
+
+
+    public function view_group_user(){
+        $modelGroup = new GroupModel();
+        $group = $modelGroup->findAll();
+
+        $data = [
+            'group' => $group
+        ];
+
+        return view('user/v_group', $data);
+    }
+    public function view_user_permission(){
+        $modelUser = new UserModel();
+        $user = $modelUser->findAll();
+
+        $data = [
+            'user' => $user
+        ];
+
+        return view('user/v_userpermission', $data);
+    }
+    public function view_group_permission(){
+        $modelGroup = new GroupModel();
+        $group = $modelGroup->findAll();
+
+        $data = [
+            'group' => $group
+        ];
+
+        return view('user/v_grouppermission', $data);
+    }
 }

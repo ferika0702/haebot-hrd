@@ -4,10 +4,10 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class KaryawanModel extends Model
+class CalonKaryawanModel extends Model
 {
     protected $DBGroup          = 'default';
-    protected $table            = 'karyawan';
+    protected $table            = 'calon_karyawan';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $insertID         = 0;
@@ -15,7 +15,7 @@ class KaryawanModel extends Model
     protected $useSoftDeletes   = true;
     protected $protectFields    = true;
     protected $allowedFields    = [
-        'id_grup', 'id_divisi', 'nik', 'jabatan', 'nama_lengkap', 'alamat', 'jenis_kelamin', 'tempat_lahir', 'tanggal_lahir', 'agama',
+        'nik','nama', 'alamat', 'jenis_kelamin', 'tempat_lahir', 'tanggal_lahir', 'agama',
         'pendidikan', 'no_telp', 'email', 'created_at', 'updated_at', 'deleted_at',
     ];
 
@@ -42,5 +42,4 @@ class KaryawanModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
-    
 }

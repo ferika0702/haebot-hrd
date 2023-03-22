@@ -15,11 +15,11 @@ class KaryawanDivisiModel extends Model
     protected $useSoftDeletes   = true;
     protected $protectFields    = true;
     protected $allowedFields    = [
-        'id_karyawan','id_divisi'
+        'id_karyawan','id_divisi','created_at', 'updated_at', 'deleted_at',
     ];
 
     // Dates
-    protected $useTimestamps = false;
+    protected $useTimestamps = true;
     protected $dateFormat    = 'datetime';
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
@@ -41,24 +41,4 @@ class KaryawanDivisiModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
-
-    public function getKaryawanDivisi(){
-        $data =  $this->db->table($this->table)
-        ->select('karyawan.id_divisi,karyawan.nama_lengkap, karyawan.jabatan, karyawan.pendidikan, karyawan.no_telp, karyawan.email')
-        ->join('karyawan_divisi', 'karyawan_divisi.id_karyawan = karyawan.id_divisi')
-        ->where('karyawan_divisi.id_divisi', $id_divisi)
-        ->get(); 
-
-        return $data;
-    }
-
-    public function getKaryawanByDivisi($id_divisi) {
-        $query = $this->db->table('karyawan')
-            ->select('nama_lengkap, jabatan, pendidikan, no_telp, email')
-            ->join('karyawan_divisi', 'karyawan_divisi.id_karyawan = karyawan.id')
-            ->where('karyawan_divisi.id_divisi', $id_divisi)
-            ->get();
-    
-        return $query->getResultArray();
-    }
 }

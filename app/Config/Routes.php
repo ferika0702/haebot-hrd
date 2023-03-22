@@ -55,23 +55,37 @@ $routes->set404Override();
 
     //list
     $routes->get('list/(:num)', 'DivisiList::index/$1', ['filter' => 'permission:SDM']);
-    $routes->get('detail-karyawan/', 'DivisiList::show/', ['filter' => 'permission:SDM']);
+    $routes->get('detail-list/(:num)', 'DivisiList::show/$1', ['filter' => 'permission:SDM']);
     $routes->post('list/create', 'DivisiList::create', ['filter' => 'permission:SDM']);
-    $routes->get('list-new', 'DivisiList::new', ['filter' => 'permission:SDM']);
+    $routes->get('list-new/(:num)', 'DivisiList::new/$1', ['filter' => 'permission:SDM']);
     $routes->delete('list-delete/(:num)', 'DivisiList::delete/$1', ['filter' => 'permission:SDM']);
 
     
-    //group
-    $routes->get('group/(:num)', 'ListGroup::index/$1', ['filter' => 'permission:SDM']);
+    //user-group
+    $routes->get('user-group/(:num)', 'ListGroup::index/$1', ['filter' => 'permission:SDM']);
     $routes->post('group/create', 'ListGroup::create', ['filter' => 'permission:SDM']);
-    $routes->get('group-new', 'ListGroup::new', ['filter' => 'permission:SDM']);
+    $routes->POST('group-new', 'ListGroup::new', ['filter' => 'permission:SDM']);
+    $routes->delete('group-delete/(:num)', 'ListGroup::delete/$1', ['filter' => 'permission:SDM']);
 
-    //permission
-    $routes->get('permission/(:num)', 'Permission::index/$1', ['filter' => 'permission:SDM']);
-    $routes->post('permission/create', 'Permission::create', ['filter' => 'permission:SDM']);
-    $routes->get('permission-new', 'Permission::new', ['filter' => 'permission:SDM']);
+
+    //user-permission
+    $routes->get('permission/(:num)', 'UserPermission::index/$1', ['filter' => 'permission:SDM']);
+    $routes->post('permission/create', 'UserPermission::create', ['filter' => 'permission:SDM']);
+    $routes->post('permission-new', 'UserPermission::new', ['filter' => 'permission:SDM']);
+    $routes->delete('user-permission/(:num)/(:num)', 'UserPermission::delete/$1/$2',['filter' => 'permission:SDM']);
+
+    
+    //group-permission
+    $routes->get('group-permission/(:num)', 'GroupPermission::index/$1', ['filter' => 'permission:SDM']);
+    $routes->post('group-permission/create', 'GroupPermission::create', ['filter' => 'permission:SDM']);
+    $routes->post('group-permission-new', 'GroupPermission::new', ['filter' => 'permission:SDM']);
+    $routes->delete('group-permission/(:num)/(:num)', 'GroupPermission::delete/$1/$2',['filter' => 'permission:SDM']);
+
 
     //user
+    $routes->get('user-permission-view', 'User::view_user_permission', ['filter' => 'permission:SDM']);
+    $routes->get('user-group-view', 'User::view_group_user', ['filter' => 'permission:SDM']);
+    $routes->get('group-permission-view', 'User::view_group_permission', ['filter' => 'permission:SDM']);
     $routes->resource('user', ['filter' => 'permission:SDM']);
     
 

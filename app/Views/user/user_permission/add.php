@@ -1,18 +1,5 @@
-<form autocomplete="off" class="row g-3 mt-2" action="<?= site_url() ?>group/create" method="POST" id="form">
+<form autocomplete="off" class="row g-3 mt-2" action="<?= site_url() ?>permission/create" method="POST" id="form">
     <?= csrf_field() ?>
-        <div class="row mb-3">
-            <label for="group" class="col-sm-3 col-form-label">Group</label>
-            <div class="col-sm-9">
-            <select class="form-control" name="group" id="group">
-                <option value=""></option>
-                <?php foreach ($group as $group) : ?>
-                    <option value="<?= $group['id'] ?>"><?= $group['name'] ?></option>
-                <?php endforeach ?>
-            </select>
-            <div class="invalid-feedback error_group_id"></div>
-            </div>
-        </div>
-
         <div class="row mb-3">
             <label for="permission" class="col-sm-3 col-form-label">Permission</label>
             <div class="col-sm-9">
@@ -22,9 +9,11 @@
                     <option value="<?= $permission->id ?>"><?= $permission->name ?></option>
                 <?php endforeach ?>
             </select>
-            <div class="invalid-feedback error_permission_id"></div>
+            <div class="invalid-feedback error_permission"></div>
             </div>
         </div>
+
+        <input type="hidden" name="user_id" value=<?=$id_user?>>
 
     <div class="col-md-9 offset-3 mb-3">
         <button id="tombolSimpan" class="btn px-5 btn-outline-primary" type="submit">Simpan<i class="fa-fw fa-solid fa-check"></i></button>
@@ -36,7 +25,6 @@
 <script>
     $('#form').submit(function(e) {
         e.preventDefault();
-
         $.ajax({
             type: "post",
             url: $(this).attr('action'),
@@ -53,15 +41,6 @@
             success: function(response) {
                 if (response.error) {
                     let err = response.error;
-
-                    if (err.error_group) {
-                        $('.error-group').html(err.error_group);
-                        $('#group').addClass('is-invalid');
-                    } else {
-                        $('.error-group').html('');
-                        $('#group').removeClass('is-invalid');
-                        $('#group').addClass('is-valid');
-                    }
                     if (err.error_permission) {
                         $('.error-permission').html(err.error_permission);
                         $('#permission').addClass('is-invalid');
@@ -91,15 +70,10 @@
     
 
     $(document).ready(function() {
-        $("#group").select2({
+        $("#permission").select2({
             theme: "bootstrap-5",
             tags: true,
             dropdownParent: $('#my-modal')
         });
-
-        $("#permission").select2({
-            theme: "bootstrap-5",
-            dropdownParent: $('#my-modal')
-    });
 })
 </script>

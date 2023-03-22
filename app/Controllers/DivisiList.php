@@ -14,17 +14,21 @@ class DivisiList extends ResourceController
 
     public function index($id_divisi = null)
     {
-        $modelKaryawan = new KaryawanModel();
+        $modelKaryawanDivisi = new KaryawanDivisiModel();
         $modelDivisi = new DivisiModel();
-        $karyawan = $modelKaryawan
-        ->select('karyawan_divisi.id,karyawan.id_divisi,karyawan.id,karyawan.nama_lengkap, karyawan.jabatan, karyawan.pendidikan, karyawan.no_telp, karyawan.email')
-        ->join('karyawan_divisi', 'karyawan_divisi.id_karyawan = karyawan.id')
+        $divisi = $modelDivisi;
+        $karyawan = $modelKaryawanDivisi
+        // ->select('karyawan_divisi.id,karyawan.id_divisi,karyawan.id,karyawan.nama_lengkap, karyawan.jabatan, karyawan.pendidikan, karyawan.no_telp, karyawan.email')
+        ->select('karyawan_divisi.id as id, k.id as id_karyawan, k.id_divisi,k.nama_lengkap, k.jabatan, k.pendidikan, k.no_telp, k.email')
+        ->join('karyawan as k', 'k.id = karyawan_divisi.id_karyawan','LEFT')
         ->where('karyawan_divisi.id_divisi', $id_divisi)
         ->findAll();        
         $data = [
-            'karyawan' => $karyawan
+            'karyawan' => $karyawan,
+            'id_divisi' => $id_divisi
         ];
         return view('divisi/list/index', $data);
+        // var_dump($data);
     }
 
 
@@ -49,14 +53,14 @@ class DivisiList extends ResourceController
     }
 
     
-    public function new()
+    public function new($id=null)
     {
         if ($this->request->isAJAX()) {
 
             $modelKaryawan = new KaryawanModel();
             $modelDivisi = new DivisiModel();
             $karyawan = $modelKaryawan->findAll();
-            $divisi = $modelDivisi->findAll();
+            $divisi = $modelDivisi->find($id);
 
             $data = [
                 'karyawan'        => $karyawan,
@@ -104,19 +108,20 @@ class DivisiList extends ResourceController
                 
                 $data = [
                     'id_karyawan' => $this->request->getPost('karyawan'),
-                    'id_divisi'   => $this->request->getPost('divisi'),
-                    // 'id_divisi'   => $modelDivisi->getInsertID(),
+                    'id_divisi'   => $this->request->getPost('id_divisi'),
                 ];
                 $modelKaryawanDivisi->save($data);
                 $json = [
                     'success' => 'Berhasil menambah data karyawan'
                 ];
+                echo json_encode($json);
                 
             }
-            echo json_encode($json);
-                } else {
-                    return 'Tidak bisa load';
-                }
+        } else {
+            return 'Tidak bisa load';
+        }
+            
+                
     }
     
     
@@ -139,7 +144,7 @@ class DivisiList extends ResourceController
         $modelKaryawanDivisi->delete($id);
 
         session()->setFlashdata('pesan', 'Data berhasil dihapus.');
-        return redirect()->to('/divisi');
+        return redirect()->back();
     }
     
 }

@@ -1,31 +1,33 @@
 <?php
 
 namespace App\Controllers;
-use App\Models\GroupModel;
-use App\Models\PermissionModel;
-use App\Models\GroupPermissionModel;
+use App\Models\UserModel;
+use Myth\Auth\Models\PermissionModel;
+use App\Models\UserPermissionModel;
 
 use CodeIgniter\RESTful\ResourceController;
 
-class Permission extends ResourceController
+class UserPermission extends ResourceController
 {
     
-    public function index($id_permission = null)
+    public function index($id_user = null)
     {
         $modelPermission = new PermissionModel();
-        $modelGroup = new GroupModel();
-        $modelGroupPermsission = new GroupPermissionModel();
-    
-        $grouppermission = $modelGroupPermsission
-        ->select('auth_groups_permissions.group_id, auth_groups.name, auth_groups.description')
-        ->join('auth_groups', 'auth_groups_permissions.group_id = auth_groups.id')
-        ->join('auth_permissions', 'auth_permissions.id = auth_groups_permissions.permission_id')
-        ->where('auth_groups_permissions.permission_id', $id_permission)
+        $modelUser = new UserModel();
+        $modelUserPermission = new UserPermissionModel();
+        $permission = $modelPermission->findAll();
+        $userpermission = $modelUserPermission
+        ->select('ap.id,ap.name, ap.description,auth_users_permissions.permission_id,auth_users_permissions.user_id')
+        ->join('auth_permissions ap', 'auth_users_permissions.permission_id = ap.id','LEFT')
+        ->where('auth_users_permissions.user_id', $id_user)
         ->findAll();      
         $data = [
-            'permission' => $grouppermission
+            'user' => $userpermission ,
+            'id_user'=>$id_user,
+            'permission'=>$permission,
         ];
-        return view('user/permission/index', $data);
+        return view('user/user_permission/index', $data);
+        // var_dump($data);
         
     }
 
@@ -41,17 +43,16 @@ class Permission extends ResourceController
         if ($this->request->isAJAX()) {
 
             $modelPermission = new PermissionModel();
-            $modelGroup = new GroupModel();
+            $modelUser = new UserModel();
             $permission = $modelPermission->findAll();
-            $group = $modelGroup->findAll();
 
             $data = [
+                'id_user'      => $this->request->getPost('id'),
                 'permission'        => $permission,
-                'group'        => $group,
             ];
 
             $json = [
-                'data'          => view('user/permission/add', $data),
+                'data'          => view('user/user_permission/add', $data),
             ];
 
             echo json_encode($json);
@@ -64,17 +65,7 @@ class Permission extends ResourceController
     public function create()
     {
         if ($this->request->isAJAX()) {
-            $modelPermission = new PermissionModel();
-            $modelGroup = new GroupModel();
-            $modelGroupPermission = new GroupPermissionModel();
-
             $validasi = [
-                'group'  => [
-                    'rules'     => 'required',
-                    'errors'    => [
-                        'required' => 'group harus diisi',
-                    ]
-                ],
                 'permission'  => [
                     'rules'     => 'required',
                     'errors'    => [
@@ -87,8 +78,7 @@ class Permission extends ResourceController
                 $validation = \Config\Services::validation();
 
                 $error = [
-                    'error_group_id' => $validation->getError('group_id'),
-                    'error_permission_id' => $validation->getError('permission_id'),
+                    'error_permission' => $validation->getError('permission'),
                 ];
 
                 $json = [
@@ -96,11 +86,15 @@ class Permission extends ResourceController
                 ];
             }
             else {
+                $modelPermission = new PermissionModel();
+                $modelUser = new UserModel();
+                $modelUserPermission = new UserPermissionModel();
                 $data = [
-                    'group_id' => $this->request->getPost('group'),
                     'permission_id' => $this->request->getPost('permission'),
+                    'user_id' => $this->request->getPost('user_id'),
                 ];
-                $modelGroupUser->save($data);
+                $modelUserPermission->save($data);
+
                 $json = [
                     'success' => 'Berhasil menambah data karyawan'
                 ];
@@ -111,7 +105,7 @@ class Permission extends ResourceController
                     return 'Tidak bisa load';
                 }
     }
-
+    
     
     public function edit($id = null)
     {
@@ -125,8 +119,14 @@ class Permission extends ResourceController
     }
 
     
-    public function delete($id = null)
+    public function delete($user_id = null, $permission_id = null)
     {
-        //
+        $modelUserPermission = new UserPermissionModel();
+
+        $modelUserPermission->where(['permission_id' => $permission_id, 'user_id' => $user_id])->delete();
+    
+        session()->setFlashdata('pesan', 'Data berhasil dihapus.');
+        return redirect()->back();
     }
+
 }

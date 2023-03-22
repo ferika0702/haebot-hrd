@@ -1,23 +1,26 @@
-<form autocomplete="off" class="row g-3 mt-2" action="<?= site_url() ?>group/create" method="POST" id="form">
+<form autocomplete="off" class="row g-3 mt-2" action="<?= site_url() ?>group-permission/create" method="POST" id="form">
     <?= csrf_field() ?>
         <div class="row mb-3">
-            <label for="user" class="col-sm-3 col-form-label">User</label>
+            <label for="permission" class="col-sm-3 col-form-label">Permission</label>
             <div class="col-sm-9">
-            <select class="form-control" name="user" id="user">
+            <select class="form-control" name="permission" id="permission">
                 <option value=""></option>
-                <?php foreach ($user as $user) : ?>
-                    <option value="<?= $user->id ?>"><?= $user->name ?></option>
+                <?php foreach ($permission as $permission) : ?>
+                    <option value="<?= $permission->id ?>"><?= $permission->name ?></option>
                 <?php endforeach ?>
             </select>
-            <div class="invalid-feedback error_user_id"></div>
+            <div class="invalid-feedback error_permission_id"></div>
             </div>
         </div>
 
         <input type="hidden" name="group_id" value=<?=$id_group?>>
+
     <div class="col-md-9 offset-3 mb-3">
         <button id="tombolSimpan" class="btn px-5 btn-outline-primary" type="submit">Simpan<i class="fa-fw fa-solid fa-check"></i></button>
     </div>
 </form>
+
+
 
 <script>
     $('#form').submit(function(e) {
@@ -39,13 +42,13 @@
             success: function(response) {
                 if (response.error) {
                     let err = response.error;
-                    if (err.error_user) {
-                        $('.error-user').html(err.error_user);
-                        $('#user').addClass('is-invalid');
+                    if (err.error_permission) {
+                        $('.error-permission_id').html(err.error_permission);
+                        $('#permission').addClass('is-invalid');
                     } else {
-                        $('.error-user').html('');
-                        $('#user').removeClass('is-invalid');
-                        $('#user').addClass('is-valid');
+                        $('.error-permission_id').html('');
+                        $('#permission').removeClass('is-invalid');
+                        $('#permission').addClass('is-valid');
                     }
                 }
                 if (response.success) {
@@ -68,7 +71,7 @@
     
 
     $(document).ready(function() {
-        $("#user").select2({
+        $("#permission").select2({
             theme: "bootstrap-5",
             tags: true,
             dropdownParent: $('#my-modal')

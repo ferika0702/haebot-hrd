@@ -1,6 +1,7 @@
 <form autocomplete="off" class="row g-3 mt-2" action="<?= site_url() ?>list/create" method="POST" id="form">
 
     <?= csrf_field() ?>
+    
         <div class="row mb-3">
             <label for="karyawan" class="col-sm-3 col-form-label">Nama Karyawan</label>
             <div class="col-sm-9">
@@ -13,19 +14,7 @@
             <div class="invalid-feedback error-karyawan"></div>
             </div>
         </div>
-
-        <div class="row mb-3">
-            <label for="divisi" class="col-sm-3 col-form-label">Nama Divisi</label>
-            <div class="col-sm-9">
-            <select class="form-control" name="divisi" id="divisi">
-                <option value=""></option>
-                <?php foreach ($divisi as $divisi) : ?>
-                    <option value="<?= $divisi['id'] ?>"><?= $divisi['nama'] ?></option>
-                <?php endforeach ?>
-            </select>
-            <div class="invalid-feedback error-divisi"></div>
-            </div>
-        </div>
+        <input type="hidden" name="id_divisi" value="<?=$divisi['id']?>">
 
     <div class="col-md-9 offset-3 mb-3">
         <button id="tombolSimpan" class="btn px-5 btn-outline-primary" type="submit">Simpan <i class="fa-fw fa-solid fa-check"></i></button>
