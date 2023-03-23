@@ -18,7 +18,7 @@ class ListGroup extends ResourceController
         $modelGroupUser = new GroupUserModel();
         $user = $modelUser->findAll();
         $groupuser = $modelGroupUser
-        ->select('auth_groups_users.id as id,us.id as id_user, us.name, us.email, us.username')
+        ->select('auth_groups_users.user_id,auth_groups_users.group_id,us.id as id_user, us.name, us.email, us.username')
         ->join('users as us', 'us.id = auth_groups_users.user_id', 'LEFT')
         ->where('auth_groups_users.group_id', $id_group)
         ->findAll();      
@@ -120,12 +120,12 @@ class ListGroup extends ResourceController
     }
 
     
-    public function delete($id = null)
+    public function delete($user_id=null, $group_id=null)
     {
         $modelGroupUser = new GroupUserModel();
 
-        $modelGroupUser->delete($id);
-
+        $modelGroupUser->where(['user_id' => $user_id, 'group_id' => $group_id])->delete();
+    
         session()->setFlashdata('pesan', 'Data berhasil dihapus.');
         return redirect()->back();
     }

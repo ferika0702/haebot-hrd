@@ -119,7 +119,7 @@ class UserPermission extends ResourceController
     }
 
     
-    public function delete($user_id = null, $permission_id = null)
+    public function delete($permission_id = null,$user_id = null)
     {
         $modelUserPermission = new UserPermissionModel();
 

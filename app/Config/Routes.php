@@ -65,7 +65,7 @@ $routes->set404Override();
     $routes->get('user-group/(:num)', 'ListGroup::index/$1', ['filter' => 'permission:SDM']);
     $routes->post('group/create', 'ListGroup::create', ['filter' => 'permission:SDM']);
     $routes->POST('group-new', 'ListGroup::new', ['filter' => 'permission:SDM']);
-    $routes->delete('group-delete/(:num)', 'ListGroup::delete/$1', ['filter' => 'permission:SDM']);
+    $routes->delete('group-delete/(:num)/(:num)', 'ListGroup::delete/$1/$2', ['filter' => 'permission:SDM']);
 
 
     //user-permission
@@ -87,6 +87,9 @@ $routes->set404Override();
     $routes->get('user-group-view', 'User::view_group_user', ['filter' => 'permission:SDM']);
     $routes->get('group-permission-view', 'User::view_group_permission', ['filter' => 'permission:SDM']);
     $routes->resource('user', ['filter' => 'permission:SDM']);
+
+    //rekrutment
+    $routes->resource('rekrutmen', ['filter' => 'permission:SDM']);
     
 
     

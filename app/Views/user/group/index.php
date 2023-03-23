@@ -49,7 +49,7 @@
                                 <input type="hidden" name="_method" value="DELETE">
                             </form>
 
-                            <button onclick="confirm_delete(<?= $user['id'] ?>)" title="Hapus" type="button" class="px-2 py-0 btn btn-sm btn-outline-danger">
+                            <button onclick="confirm_delete(<?= $user['user_id']?>,<?=$id_group?>)" title="Hapus" type="button" class="px-2 py-0 btn btn-sm btn-outline-danger">
                                 <i class="fa-fw fa-solid fa-trash"></i>
                             </button>
                         </td>
@@ -141,7 +141,7 @@
     }
 
 
-    function confirm_delete(id) {
+    function confirm_delete(user_id,group_id) {
         Swal.fire({
             backdrop: false,
             title: 'Konfirmasi?',
@@ -153,7 +153,7 @@
             confirmButtonText: 'Ya, hapus!'
         }).then((result) => {
             if (result.isConfirmed) {
-                $('#form_delete').attr('action', '<?= site_url() ?>group-delete/' + id);
+                $('#form_delete').attr('action', '<?= site_url() ?>group-delete/' + user_id +'/'+group_id);
                 $('#form_delete').submit();
             }
         })
