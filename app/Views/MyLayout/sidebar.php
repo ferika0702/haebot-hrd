@@ -27,6 +27,15 @@
                 <?php endif; ?>
 
                 <?php if (has_permission('SDM')) : ?>
+                    <a class="nav-link" href="<?= base_url() ?>/absensi">
+                        <div class="sb-nav-link-icon">
+                            <i class="fa-fw fa-solid fa-user"></i>
+                        </div>
+                        Absensi
+                    </a>
+                <?php endif; ?>
+
+                <?php if (has_permission('SDM')) : ?>
                     <a class="nav-link" href="<?= base_url() ?>/divisi">
                         <div class="sb-nav-link-icon">
                             <i class="fa-fw fa-solid fa-network-wired"></i>

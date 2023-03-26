@@ -67,52 +67,10 @@ class Rekrutmen extends ResourceController
         if ($this->request->isAJAX()) {
 
             $validasi = [
-                'nik'  => [
-                    'rules'     => 'required|is_unique[karyawan.nik]',
-                    'errors'    => [
-                        'required' => 'nik harus diisi',
-                    ]
-                ],
                 'nama'  => [
                     'rules'     => 'required',
                     'errors'    => [
                         'required' => 'nama lengkap harus diisi',
-                    ]
-                ],
-                'alamat'  => [
-                    'rules'     => 'required',
-                    'errors'    => [
-                        'required' => 'alamat harus diisi',
-                    ]
-                ],
-                'jenis_kelamin'  => [
-                    'rules'     => 'required',
-                    'errors'    => [
-                        'required' => 'jenis kelamin harus diisi',
-                    ]
-                ],
-                'tempat_lahir'  => [
-                    'rules'     => 'required',
-                    'errors'    => [
-                        'required' => 'tempat lahir harus diisi',
-                    ]
-                ],
-                'tanggal_lahir'  => [
-                    'rules'     => 'required',
-                    'errors'    => [
-                        'required' => 'tanggal lahir harus diisi',
-                    ]
-                ],
-                'agama'  => [
-                    'rules'     => 'required',
-                    'errors'    => [
-                        'required' => 'agama harus diisi',
-                    ]
-                ],
-                'pendidikan'  => [
-                    'rules'     => 'required',
-                    'errors'    => [
-                        'required' => 'pendidikan harus diisi',
                     ]
                 ],
                 'no_telp'  => [
@@ -121,28 +79,14 @@ class Rekrutmen extends ResourceController
                         'required' => 'no telepon harus diisi',
                     ]
                 ],
-                'email'  => [
-                    'rules'     => 'required|valid_email|is_unique[karyawan.email]',
-                    'errors'    => [
-                        'required' => 'email harus diisi',
-                    ]
-                ],
             ];
 
             if (!$this->validate($validasi)) {
                 $validation = \Config\Services::validation();
 
                 $error = [
-                    'error_nik' => $validation->getError('nik'),
                     'error_nama' => $validation->getError('nama'),
-                    'error_alamat' => $validation->getError('alamat'),
-                    'error_jenis_kelamin' => $validation->getError('jenis_kelamin'),
-                    'error_tempat_lahir' => $validation->getError('tempat_lahir'),
-                    'error_tanggal_lahir' => $validation->getError('tanggal_lahir'),
-                    'error_agama' => $validation->getError('agama'),
-                    'error_pendidikan' => $validation->getError('pendidikan'),
                     'error_no_telp' => $validation->getError('no_telp'),
-                    'error_email' => $validation->getError('email'),
                 ];
 
                 $json = [
@@ -199,52 +143,10 @@ class Rekrutmen extends ResourceController
     public function update($id = null)
     {
         $validasi = [
-            'nik'  => [
-                'rules'     => 'required',
-                'errors'    => [
-                    'required' => 'nik harus diisi',
-                ]
-            ],
             'nama'  => [
                 'rules'     => 'required',
                 'errors'    => [
                     'required' => 'nama lengkap harus diisi',
-                ]
-            ],
-            'alamat'  => [
-                'rules'     => 'required',
-                'errors'    => [
-                    'required' => 'alamat harus diisi',
-                ]
-            ],
-            'jenis_kelamin'  => [
-                'rules'     => 'required',
-                'errors'    => [
-                    'required' => 'jenis kelamin harus diisi',
-                ]
-            ],
-            'tempat_lahir'  => [
-                'rules'     => 'required',
-                'errors'    => [
-                    'required' => 'tempat lahir harus diisi',
-                ]
-            ],
-            'tanggal_lahir'  => [
-                'rules'     => 'required',
-                'errors'    => [
-                    'required' => 'tanggal lahir harus diisi',
-                ]
-            ],
-            'agama'  => [
-                'rules'     => 'required',
-                'errors'    => [
-                    'required' => 'agama harus diisi',
-                ]
-            ],
-            'pendidikan'  => [
-                'rules'     => 'required',
-                'errors'    => [
-                    'required' => 'pendidikan harus diisi',
                 ]
             ],
             'no_telp'  => [
@@ -253,28 +155,14 @@ class Rekrutmen extends ResourceController
                     'required' => 'no telepon harus diisi',
                 ]
             ],
-            'email'  => [
-                'rules'     => 'required',
-                'errors'    => [
-                    'required' => 'email harus diisi',
-                ]
-            ],
         ];
 
         if (!$this->validate($validasi)) {
             $validation = \Config\Services::validation();
 
             $error = [
-                'error_nik' => $validation->getError('nik'),
                 'error_nama' => $validation->getError('nama'),
-                'error_alamat' => $validation->getError('alamat'),
-                'error_jenis_kelamin' => $validation->getError('jenis_kelamin'),
-                'error_tempat_lahir' => $validation->getError('tempat_lahir'),
-                'error_tanggal_lahir' => $validation->getError('tanggal_lahir'),
-                'error_agama' => $validation->getError('agama'),
-                'error_pendidikan' => $validation->getError('pendidikan'),
                 'error_no_telp' => $validation->getError('no_telp'),
-                'error_email' => $validation->getError('email'),
             ];
 
             $json = [

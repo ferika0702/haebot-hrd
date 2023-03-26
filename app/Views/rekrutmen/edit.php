@@ -134,14 +134,6 @@
                 if (response.error) {
                     let err = response.error;
 
-                    if (err.error_nik) {
-                        $('.error-nik').html(err.error_nik);
-                        $('#nik').addClass('is-invalid');
-                    } else {
-                        $('.error-nik').html('');
-                        $('#nik').removeClass('is-invalid');
-                        $('#nik').addClass('is-valid');
-                    }
                     if (err.error_nama) {
                         $('.error-nama').html(err.error_nama);
                         $('#nama').addClass('is-invalid');
@@ -149,54 +141,6 @@
                         $('.error-nama').html('');
                         $('#nama').removeClass('is-invalid');
                         $('#nama').addClass('is-valid');
-                    }
-                    if (err.error_alamat) {
-                        $('.error-alamat').html(err.error_alamat);
-                        $('#alamat').addClass('is-invalid');
-                    } else {
-                        $('.error-alamat').html('');
-                        $('#alamat').removeClass('is-invalid');
-                        $('#alamat').addClass('is-valid');
-                    }
-                    if (err.error_jenis_kelamin) {
-                        $('.error-jenis_kelamin').html(err.error_jenis_kelamin);
-                        $('#jenis_kelamin').addClass('is-invalid');
-                    } else {
-                        $('.error-jenis_kelamin').html('');
-                        $('#jenis_kelamin').removeClass('is-invalid');
-                        $('#jenis_kelamin').addClass('is-valid');
-                    }
-                    if (err.error_tempat_lahir) {
-                        $('.error-tempat_lahir').html(err.error_tempat_lahir);
-                        $('#tempat_lahir').addClass('is-invalid');
-                    } else {
-                        $('.error-tempat_lahir').html('');
-                        $('#tempat_lahir').removeClass('is-invalid');
-                        $('#tempat_lahir').addClass('is-valid');
-                    }
-                    if (err.error_tanggal_lahir) {
-                        $('.error-tanggal_lahir').html(err.error_tanggal_lahir);
-                        $('#tanggal_lahir').addClass('is-invalid');
-                    } else {
-                        $('.error-tanggal_lahir').html('');
-                        $('#tanggal_lahir').removeClass('is-invalid');
-                        $('#tanggal_lahir').addClass('is-valid');
-                    }
-                    if (err.error_agama) {
-                        $('.error-agama').html(err.error_agama);
-                        $('#agama').addClass('is-invalid');
-                    } else {
-                        $('.error-agama').html('');
-                        $('#agama').removeClass('is-invalid');
-                        $('#agama').addClass('is-valid');
-                    }
-                    if (err.error_pendidikan) {
-                        $('.error-pendidikan').html(err.error_pendidikan);
-                        $('#pendidikan').addClass('is-invalid');
-                    } else {
-                        $('.error-pendidikan').html('');
-                        $('#pendidikan').removeClass('is-invalid');
-                        $('#pendidikan').addClass('is-valid');
                     }
                     if (err.error_no_telp) {
                         $('.error-no_telp').html(err.error_no_telp);
@@ -233,26 +177,4 @@
         return false
     })
 
-    $(document).ready(function() {
-        $("#jenis_kelamin").select2({
-            theme: "bootstrap-5",
-            tags: true,
-            dropdownParent: $('#my-modal')
-        });
-
-        $("#agama").select2({
-            theme: "bootstrap-5",
-            dropdownParent: $('#my-modal')
-        });
-
-        $("#pendidikan").select2({
-            theme: "bootstrap-5",
-            dropdownParent: $('#my-modal')
-        });
-
-        $('#tanggal_lahir').datepicker({
-            format: "yyyy-mm-dd"
-        });
-
-    })
 </script>

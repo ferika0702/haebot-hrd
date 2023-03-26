@@ -7,12 +7,19 @@
 
     <div class="d-flex mb-0">
         <div class="me-auto mb-1">
-            <h3 style="color: #566573;">User Permission</h3>
+            <h3 style="color: #566573;">User Permission </h3>
+        </div>
+        <div class="me-2 mb-1">
+            <a class="btn btn-sm btn-outline-dark" href="<?= site_url() ?>user">
+                <i class="fa-fw fa-solid fa-arrow-left"></i> Kembali
+            </a>
         </div>
     </div>
+    
 
     <hr class="mt-0 mb-4">
 
+    
     <div class="table-responsive">
         <table class="table table-hover table-striped table-bordered" id="tabel">
             <thead>
@@ -26,15 +33,15 @@
             </thead>
             <tbody>
                 <?php $no = 1 ?>
-                <?php foreach ($user as $permission) : ?>
+                <?php foreach ($user as $user) : ?>
                     <tr>
                         <td><?= $no++ ?></td>
-                        <td><?= $permission->name ?></td>
-                        <td><?= $permission->email ?></td>
-                        <td><?= $permission->username ?></td>
+                        <td><?= $user->name ?></td>
+                        <td><?= $user->email ?></td>
+                        <td><?= $user->username ?></td>
                         <td class="text-center">
                             
-                            <a title="List" class="px-2 py-0 btn btn-sm btn-outline-dark" href="<?= site_url() ?>permission/<?= $permission->id ?>">
+                            <a title="List" class="px-2 py-0 btn btn-sm btn-outline-dark" href="<?= site_url() ?>permission/<?= $user->id ?>">
                                 <i class="fa-fw fa-solid fa-list"></i>
                             </a>
                         </td>

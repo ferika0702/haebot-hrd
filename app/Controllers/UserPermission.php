@@ -15,6 +15,7 @@ class UserPermission extends ResourceController
         $modelPermission = new PermissionModel();
         $modelUser = new UserModel();
         $modelUserPermission = new UserPermissionModel();
+        $user = $modelUser->find($id_user);
         $permission = $modelPermission->findAll();
         $userpermission = $modelUserPermission
         ->select('ap.id,ap.name, ap.description,auth_users_permissions.permission_id,auth_users_permissions.user_id')
@@ -22,9 +23,11 @@ class UserPermission extends ResourceController
         ->where('auth_users_permissions.user_id', $id_user)
         ->findAll();      
         $data = [
+            
             'user' => $userpermission ,
             'id_user'=>$id_user,
             'permission'=>$permission,
+            'nama_user' => $user->name
         ];
         return view('user/user_permission/index', $data);
         // var_dump($data);
@@ -48,7 +51,7 @@ class UserPermission extends ResourceController
 
             $data = [
                 'id_user'      => $this->request->getPost('id'),
-                'permission'        => $permission,
+                'permission'   => $permission,
             ];
 
             $json = [

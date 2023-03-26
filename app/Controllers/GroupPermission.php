@@ -14,6 +14,7 @@ class GroupPermission extends ResourceController
         $modelGroup = new GroupModel();
         $modelGroupPermission = new GroupPermissionModel();
         $permission = $modelPermission->findAll();
+        $group= $modelGroup->find($id_group);
         $grouppermission = $modelGroupPermission
         ->select('ap.id, ap.name, ap.description, auth_groups_permissions.permission_id, auth_groups_permissions.group_id')
         ->join('auth_permissions as ap', 'ap.id = auth_groups_permissions.permission_id', 'LEFT')
@@ -23,6 +24,7 @@ class GroupPermission extends ResourceController
             'group' => $grouppermission,
             'id_group' => $id_group,
             'permission'   => $permission,
+            'nama_group' => $group['name']
         ];
         return view('user/group_permission/index', $data);
         // var_dump(json_encode($data));

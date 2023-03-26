@@ -16,6 +16,7 @@ class ListGroup extends ResourceController
         $modelUser = new UserModel();
         $modelGroup = new GroupModel();
         $modelGroupUser = new GroupUserModel();
+        $group= $modelGroup->find($id_group);
         $user = $modelUser->findAll();
         $groupuser = $modelGroupUser
         ->select('auth_groups_users.user_id,auth_groups_users.group_id,us.id as id_user, us.name, us.email, us.username')
@@ -26,6 +27,7 @@ class ListGroup extends ResourceController
             'group' => $groupuser,
             'id_group' => $id_group,
             'user'   => $user,
+            'nama_group' => $group['name']
         ];
         return view('user/group/index', $data);
         // var_dump($data);
