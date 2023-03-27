@@ -92,6 +92,8 @@ $routes->set404Override();
     $routes->resource('rekrutmen', ['filter' => 'permission:SDM']);
 
     //absensi
+    $routes->get('view-absensi', 'Absensi::viewAbsensi', ['filter' => 'permission:SDM']);
+    $routes->get('view-laporan', 'Absensi::viewLaporan', ['filter' => 'permission:SDM']);
     $routes->resource('absensi', ['filter' => 'permission:SDM']);
     
 

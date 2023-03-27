@@ -15,7 +15,7 @@ class KaryawanAbsen extends Migration
                 'unsigned'       => true,
                 'auto_increment' => true,
             ],
-            'karyawan_id' => [
+            'id_karyawan' => [
                 'type'           => 'INT',
                 'constraint'     => 11,
                 'unsigned'       => true,
@@ -30,7 +30,7 @@ class KaryawanAbsen extends Migration
             ],
         ]);
         $this->forge->addKey('id', true);
-        $this->forge->addForeignKey('karyawan_id', 'karyawan', 'id', 'CASCADE', 'CASCADE');
+        $this->forge->addForeignKey('id_karyawan', 'karyawan', 'id', 'CASCADE', 'CASCADE');
         $this->forge->createTable('karyawan_absen');
     }
 

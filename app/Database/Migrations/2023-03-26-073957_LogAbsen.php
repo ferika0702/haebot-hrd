@@ -15,7 +15,7 @@ class LogAbsen extends Migration
                 'unsigned'       => true,
                 'auto_increment' => true,
             ],
-            'absen_id' => [
+            'id_absen' => [
                 'type'           => 'INT',
                 'constraint'     => 11,
                 'unsigned'       => true,
@@ -28,7 +28,7 @@ class LogAbsen extends Migration
             ],
         ]);
         $this->forge->addKey('id', true);
-        $this->forge->addForeignKey('absen_id', 'karyawan_absen', 'id', 'CASCADE', 'CASCADE');
+        $this->forge->addForeignKey('id_absen', 'karyawan_absen', 'id', 'CASCADE', 'CASCADE');
         $this->forge->createTable('log_absen');
     }
 
