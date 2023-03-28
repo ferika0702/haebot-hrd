@@ -10,7 +10,7 @@
             <h3 style="color: #566573;">Log Absensi</h3>
         </div>
         <div class="me-2 mb-1">
-            <a class="btn btn-sm btn-outline-dark" href="<?= site_url() ?>view-absensi"?>>
+            <a class="btn btn-sm btn-outline-dark" href="<?= site_url() ?>view-absensi">
                 <i class="fa-fw fa-solid fa-arrow-left"></i> Kembali
             </a>
         </div>
@@ -28,9 +28,9 @@
             <thead>
                 <tr>
                     <th class="text-center" width="5%">No</th>
-                    <th class="text-center" width="35%">Tanggal</th>
-                    <th class="text-center" width="35%">Waktu</th>
-                    <th class="text-center" width="20%">Aksi</th>
+                    <th class="text-center" width="30%">Tanggal</th>
+                    <th class="text-center" width="25%">Waktu</th>
+                    <!-- <th class="text-center" width="20%">Aksi</th> -->
                 </tr>
             </thead>
             <tbody>
@@ -40,11 +40,11 @@
                         <td><?= $no++ ?></td>
                         <td><?= $absen['log_date'] ?></td>
                         <td><?= $absen['log_time'] ?></td>
-                        <td class="text-center">
+                        <!-- <td class="text-center">
                         <a title="List" class="px-2 py-0 btn btn-sm btn-outline-dark" href="">
                                 <i class="fa-fw fa-solid fa-list"></i>
                             </a>
-                        </td>
+                        </td> -->
                     </tr>
                 <?php endforeach; ?>
                 </tr>

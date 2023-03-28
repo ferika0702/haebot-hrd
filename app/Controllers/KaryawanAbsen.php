@@ -63,9 +63,10 @@ class KaryawanAbsen extends ResourceController
         if ($this->request->isAJAX()) {
             $validasi = [
                 'tanggal_absen'  => [
-                    'rules'     => 'required',
+                    'rules'     => 'required|is_unique[karyawan_absen.tanggal_absen]',
                     'errors'    => [
                         'required' => 'tanggal_absen harus diisi',
+                        'is_unique' => 'tanggal sudah ada'
                     ]
                 ],
                 'status'  => [

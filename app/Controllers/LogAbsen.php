@@ -62,15 +62,17 @@ class LogAbsen extends ResourceController
         if ($this->request->isAJAX()) {
             $validasi = [
                 'log_date'  => [
-                    'rules'     => 'required',
+                    'rules'     => 'required|is_unique[log_absen.log_date]',
                     'errors'    => [
-                        'required' => 'log_date harus diisi',
+                        'required' => 'tanggal harus diisi',
+                        'is_unique' => 'tanggal sudah ada'
                     ]
                 ],
                 'log_time'  => [
-                    'rules'     => 'required',
+                    'rules'     => 'required|is_unique[log_absen.log_time]',
                     'errors'    => [
-                        'required' => 'log_time harus diisi',
+                        'required' => 'waktu harus diisi',
+                        'is_unique' => 'waktu sudah ada'
                     ]
                 ]
             ];

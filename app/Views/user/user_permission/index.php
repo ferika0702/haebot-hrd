@@ -29,7 +29,7 @@
                 <tr>
                     <th class="text-center" width="5%">No</th>
                     <th class="text-center" width="30%">Nama Grup</th>
-                    <th class="text-center" width="25%">Deskripis</th>
+                    <th class="text-center" width="25%">Deskripsi</th>
                     <th class="text-center" width="15%">Aksi</th>
                 </tr>
             </thead>
