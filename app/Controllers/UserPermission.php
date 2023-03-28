@@ -21,7 +21,7 @@ class UserPermission extends ResourceController
         ->select('ap.id,ap.name, ap.description,auth_users_permissions.permission_id,auth_users_permissions.user_id')
         ->join('auth_permissions ap', 'auth_users_permissions.permission_id = ap.id','LEFT')
         ->where('auth_users_permissions.user_id', $id_user)
-        ->findAll();      
+        ->findAll();
         $data = [
             
             'user' => $userpermission ,
@@ -30,8 +30,6 @@ class UserPermission extends ResourceController
             'nama_user' => $user->name
         ];
         return view('user/user_permission/index', $data);
-        // var_dump($data);
-        
     }
 
     
@@ -104,9 +102,9 @@ class UserPermission extends ResourceController
                 
             }
             echo json_encode($json);
-                } else {
-                    return 'Tidak bisa load';
-                }
+            } else {
+                return 'Tidak bisa load';
+            }
     }
     
     

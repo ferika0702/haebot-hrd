@@ -1,76 +1,126 @@
 <?php
 
 namespace App\Controllers;
+use App\Models\KaryawanAbsenModel;
+use App\Models\LogAbsenModel;
 
 use CodeIgniter\RESTful\ResourceController;
 
 class LogAbsen extends ResourceController
 {
-    /**
-     * Return an array of resource objects, themselves in array format
-     *
-     * @return mixed
-     */
-    public function index()
+    
+    public function index($id_karyawan_absen=null)
     {
-        //
+        $modelLogAbsen=new LogAbsenModel();
+        $modelKaryawanAbsen = new KaryawanAbsenModel();
+        $absen = $modelKaryawanAbsen->find($id_karyawan_absen);
+        $log=$modelLogAbsen
+            ->select('log_absen.*,karyawan_absen.id as absen_id')
+            ->join('karyawan_absen', 'log_absen.id_absen=karyawan_absen.id')
+            ->where('log_absen.id_absen',$id_karyawan_absen)
+            ->findAll();
+        $data=[
+            'log'=>$log,
+            'id_absen'=>$id_karyawan_absen,
+        ];
+        return view('absensi/log_absensi/index', $data);
     }
 
-    /**
-     * Return the properties of a resource object
-     *
-     * @return mixed
-     */
+    
     public function show($id = null)
     {
         //
     }
 
-    /**
-     * Return a new resource object, with default properties
-     *
-     * @return mixed
-     */
+    
     public function new()
     {
-        //
+        if ($this->request->isAJAX()) {
+
+            $modelLogAbsen = new LogAbsenModel();
+            $modelKaryawanAbsen = new KaryawanAbsenModel();
+            $log = $modelLogAbsen->findAll();
+
+            $data = [
+                'id_absen'      => $this->request->getPost('id'),
+                'log'        => $log,
+            ];
+
+            $json = [
+                'data'          => view('absensi/log_absensi/add', $data),
+            ];
+
+            echo json_encode($json);
+        } else {
+            return 'Tidak bisa load';
+        }
     }
 
-    /**
-     * Create a new resource object, from "posted" parameters
-     *
-     * @return mixed
-     */
+    
     public function create()
     {
-        //
+        if ($this->request->isAJAX()) {
+            $validasi = [
+                'log_date'  => [
+                    'rules'     => 'required',
+                    'errors'    => [
+                        'required' => 'log_date harus diisi',
+                    ]
+                ],
+                'log_time'  => [
+                    'rules'     => 'required',
+                    'errors'    => [
+                        'required' => 'log_time harus diisi',
+                    ]
+                ]
+            ];
+
+            if (!$this->validate($validasi)) {
+                $validation = \Config\Services::validation();
+
+                $error = [
+                    'error_log_date' => $validation->getError('log_date'),
+                    'error_log_time' => $validation->getError('log_time'),
+                ];
+
+                $json = [
+                    'error' => $error
+                ];
+            }
+            else {
+                $modelLogAbsen = new LogAbsenModel();
+                $data = [
+                    'id_absen' => $this->request->getPost('absen_id'),
+                    'log_date' => $this->request->getPost('log_date'),
+                    'log_time' => $this->request->getPost('log_time'),
+                ];
+                
+                $modelLogAbsen->save($data);
+
+                $json = [
+                    'success' => 'Berhasil menambah data karyawan'
+                ];
+                
+            }
+            echo json_encode($json);
+            } else {
+                return 'Tidak bisa load';
+            }
     }
 
-    /**
-     * Return the editable properties of a resource object
-     *
-     * @return mixed
-     */
+    
     public function edit($id = null)
     {
         //
     }
 
-    /**
-     * Add or update a model resource, from "posted" properties
-     *
-     * @return mixed
-     */
+    
     public function update($id = null)
     {
         //
     }
 
-    /**
-     * Delete the designated resource object from the model
-     *
-     * @return mixed
-     */
+    
     public function delete($id = null)
     {
         //

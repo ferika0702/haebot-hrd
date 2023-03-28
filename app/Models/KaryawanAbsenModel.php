@@ -15,7 +15,7 @@ class KaryawanAbsenModel extends Model
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
     protected $allowedFields    = [
-        'id_karyawan','tangga','status'
+        'id_karyawan','tanggal_absen','status'
     ];
 
     // Dates

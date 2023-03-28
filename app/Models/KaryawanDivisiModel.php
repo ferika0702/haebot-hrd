@@ -12,10 +12,10 @@ class KaryawanDivisiModel extends Model
     protected $useAutoIncrement = true;
     protected $insertID         = 0;
     protected $returnType       = 'array';
-    protected $useSoftDeletes   = true;
+    protected $useSoftDeletes   = false;
     protected $protectFields    = true;
     protected $allowedFields    = [
-        'id_karyawan','id_divisi','created_at', 'updated_at', 'deleted_at',
+        'id_karyawan','id_divisi',
     ];
 
     // Dates

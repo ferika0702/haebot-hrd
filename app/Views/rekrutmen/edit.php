@@ -176,5 +176,15 @@
         });
         return false
     })
+    $(document).ready(function() {
+        $("#pendidikan").select2({
+            theme: "bootstrap-5",
+            tags: true,
+            dropdownParent: $('#my-modal')
+        });
+        $('#tanggal_lahir').datepicker({
+            format: "yyyy-mm-dd"
+        });
+})
 
 </script>

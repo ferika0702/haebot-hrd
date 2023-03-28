@@ -29,7 +29,7 @@
                         <td><?= $no++ ?></td>
                         <td><?= $sp['nama_lengkap'] ?></td>
                         <td class="text-center">
-                            <a title="List" class="px-2 py-0 btn btn-sm btn-outline-dark" href="">
+                            <a title="List" class="px-2 py-0 btn btn-sm btn-outline-dark" href="<?= site_url() ?>karyawan-absensi/<?= $sp['id'] ?>">
                                 <i class="fa-fw fa-solid fa-list"></i>
                             </a>
                         </td>

@@ -20,13 +20,12 @@ class KaryawanAbsen extends Migration
                 'constraint'     => 11,
                 'unsigned'       => true,
             ],
-            'tanggal' => [
-                'type'           => 'DATE',
-            ],
             'status' =>[
                 'type'           => 'ENUM',
                 'constraint'     => "'MASUK','ALFA','SAKIT','IZIN','LIBUR','WFA'",
-                'default'        => 'MASUK'
+            ],
+            'tanggal_absen' =>[
+                'type'           => 'DATE',
             ],
         ]);
         $this->forge->addKey('id', true);

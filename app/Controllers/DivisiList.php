@@ -16,7 +16,7 @@ class DivisiList extends ResourceController
     {
         $modelKaryawanDivisi = new KaryawanDivisiModel();
         $modelDivisi = new DivisiModel();
-        $divisi = $modelDivisi;
+        $divisi = $modelDivisi->find($id_divisi);
         $karyawan = $modelKaryawanDivisi
         // ->select('karyawan_divisi.id,karyawan.id_divisi,karyawan.id,karyawan.nama_lengkap, karyawan.jabatan, karyawan.pendidikan, karyawan.no_telp, karyawan.email')
         ->select('karyawan_divisi.id as id, k.id as id_karyawan, k.id_divisi,k.nama_lengkap, k.jabatan, k.pendidikan, k.no_telp, k.email')
@@ -25,7 +25,8 @@ class DivisiList extends ResourceController
         ->findAll();        
         $data = [
             'karyawan' => $karyawan,
-            'id_divisi' => $id_divisi
+            'id_divisi' => $id_divisi,
+            'nama_divisi' => $divisi['nama']
         ];
         return view('divisi/list/index', $data);
         // var_dump($data);

@@ -29,7 +29,7 @@
                 <?php if (has_permission('SDM')) : ?>
                     <a class="nav-link" href="<?= base_url() ?>/absensi">
                         <div class="sb-nav-link-icon">
-                            <i class="fa-fw fa-solid fa-user"></i>
+                            <i class="fa-fw fa-solid fa-user-clock"></i>
                         </div>
                         Absensi
                     </a>
