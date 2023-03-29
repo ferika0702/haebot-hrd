@@ -112,21 +112,7 @@ class LogAbsen extends ResourceController
     
     public function edit($id = null)
     {
-        if ($this->request->isAJAX()) {
-            $modelLogAbsen = new LogAbsenModel();
-            $log      = $modelLogAbsen->find($id);
 
-            $data = [
-                'log' => $log,
-            ];
-            $json = [
-                'data' => view('absensi/log_absensi/edit', $data),
-            ];
-
-            echo json_encode($json);
-        } else {
-            return 'Tidak bisa load';
-        }
     }
 
     

@@ -30,15 +30,28 @@
                     <th class="text-center" width="5%">No</th>
                     <th class="text-center" width="30%">Tanggal</th>
                     <th class="text-center" width="25%">Waktu</th>
+                    <th class="text-center" width="10%">Aksi</th>
                 </tr>
             </thead>
             <tbody>
             <?php $no = 1 ?>
+            <?php setlocale(LC_TIME, 'id_ID.utf8');?>
+            <?php echo setlocale(LC_TIME, 0); ?>
                 <?php foreach ($log as $absen) : ?>
                     <tr>
                         <td><?= $no++ ?></td>
-                        <td><?= date('l, d M Y', strtotime($absen['log_date'])) ?></td>
+                        <td><?= strftime('%A, %e %B %Y', strtotime($absen['log_date'])) ?></td>
                         <td><?= $absen['log_time'] ?></td>
+                        <td class="text-center">
+                            <form id="form_delete" method="POST" class="d-inline">
+
+                                <input type="hidden" name="_method" value="DELETE">
+                            </form>
+
+                            <button onclick="confirm_delete(<?= $absen['id'] ?>)" title="Hapus" type="button" class="px-2 py-0 btn btn-sm btn-outline-danger">
+                                <i class="fa-fw fa-solid fa-trash"></i>
+                            </button>
+                        </td>
                     </tr>
                 <?php endforeach; ?>
                 </tr>
@@ -56,7 +69,7 @@
     <div class="modal-dialog modal-lg modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="judulModal">Tambah user</h1>
+                <h1 class="modal-title fs-5" id="judulModal">Tambah Absensi</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body" id="isiForm">
@@ -117,7 +130,7 @@
                 if (res.data) {
                     $('#isiForm').html(res.data)
                     $('#my-modal').modal('toggle')
-                    $('#judulModal').html('Tambah permission')
+                    $('#judulModal').html('Tambah Log Absensi')
                 }
             },
             error: function(e) {
@@ -126,6 +139,27 @@
         })
     }
 
+
+    function confirm_delete(id) {
+        Swal.fire({
+            title: 'Konfirmasi?',
+            text: "Apakah yakin menghapus!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya, hapus!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $('#form_delete').attr('action', '<?= site_url() ?>log-absen/'+id);
+                $('#form_delete').submit();
+            }
+        })
+    }
+    
+
 </script>
+<script src="<?php echo base_url('js/time.js'); ?>"></script>
+
 
 <?= $this->endSection() ?>
