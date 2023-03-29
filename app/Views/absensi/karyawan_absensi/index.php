@@ -38,7 +38,7 @@
                 <?php foreach ($absen as $absen) : ?>
                     <tr>
                         <td><?= $no++ ?></td>
-                        <td><?= $absen['tanggal_absen'] ?></td>
+                        <td><?= date('l, d M Y', strtotime($absen['tanggal_absen'])) ?></td>
                         <td><?= $absen['status'] ?></td>
                         <td class="text-center">
                         <a title="Log" class="px-2 py-0 btn btn-sm btn-outline-dark" href="<?= site_url() ?>log-absensi/<?= $absen['id'] ?>">

@@ -25,6 +25,14 @@ class KaryawanDivisi extends Migration
                 'constraint'     => 11,
                 'unsigned'       => true,
             ],
+            'created_at' => [
+                'type'       => 'TIMESTAMP',
+                'null'       => true,
+            ],
+            'updated_at' => [
+                'type'       => 'TIMESTAMP',
+                'null'       => true,
+            ],
         ]);
         $this->forge->addKey('id', true);
         $this->forge->addForeignKey('id_karyawan', 'karyawan', 'id', 'CASCADE', 'CASCADE');

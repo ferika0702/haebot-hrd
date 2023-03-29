@@ -30,7 +30,6 @@
                     <th class="text-center" width="5%">No</th>
                     <th class="text-center" width="30%">Tanggal</th>
                     <th class="text-center" width="25%">Waktu</th>
-                    <!-- <th class="text-center" width="20%">Aksi</th> -->
                 </tr>
             </thead>
             <tbody>
@@ -38,13 +37,8 @@
                 <?php foreach ($log as $absen) : ?>
                     <tr>
                         <td><?= $no++ ?></td>
-                        <td><?= $absen['log_date'] ?></td>
+                        <td><?= date('l, d M Y', strtotime($absen['log_date'])) ?></td>
                         <td><?= $absen['log_time'] ?></td>
-                        <!-- <td class="text-center">
-                        <a title="List" class="px-2 py-0 btn btn-sm btn-outline-dark" href="">
-                                <i class="fa-fw fa-solid fa-list"></i>
-                            </a>
-                        </td> -->
                     </tr>
                 <?php endforeach; ?>
                 </tr>
@@ -131,6 +125,7 @@
             }
         })
     }
+
 </script>
 
 <?= $this->endSection() ?>

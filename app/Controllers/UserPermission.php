@@ -4,6 +4,9 @@ namespace App\Controllers;
 use App\Models\UserModel;
 use Myth\Auth\Models\PermissionModel;
 use App\Models\UserPermissionModel;
+use App\Models\GroupModel;
+use App\Models\GroupPermissionModel;
+use App\Models\GroupUserModel;
 
 use CodeIgniter\RESTful\ResourceController;
 

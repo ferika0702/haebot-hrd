@@ -103,8 +103,9 @@ $routes->set404Override();
     $routes->get('log-absensi/(:num)', 'LogAbsen::index/$1', ['filter' => 'permission:SDM']);
     $routes->post('log-absen-new', 'LogAbsen::new', ['filter' => 'permission:SDM']);
     $routes->post('log-absen/create', 'LogAbsen::create', ['filter' => 'permission:SDM']);
-    
-
+    $routes->get('log-absen/edit/(:num)', 'LogAbsen::edit/$1', ['filter' => 'permission:SDM']);
+    $routes->post('log-absen/update/(:num)', 'LogAbsen::update/$1', ['filter' => 'permission:SDM']);
+    $routes->delete('log-absen/(:num)', 'LogAbsen::delete/$1', ['filter' => 'permission:SDM']);
     
 });
 

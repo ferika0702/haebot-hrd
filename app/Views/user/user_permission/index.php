@@ -53,6 +53,17 @@
                 </tr>
             </tbody>
         </table>
+
+        <table class="table table-hover table-striped table-bordered" width="100%" id="tabel">
+            <thead>
+                <tr>
+                    <th class="text-center" width="5%">No</th>
+                    <th class="text-center" width="30%">Nama Grup</th>
+                    <th class="text-center" width="25%">Deskripsi</th>
+                    <th class="text-center" width="15%">Aksi</th>
+                </tr>
+            </thead>
+        </table>
     </div>
 
 </main>

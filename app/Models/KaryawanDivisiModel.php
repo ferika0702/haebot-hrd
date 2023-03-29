@@ -15,7 +15,7 @@ class KaryawanDivisiModel extends Model
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
     protected $allowedFields    = [
-        'id_karyawan','id_divisi',
+        'id_karyawan','id_divisi','created_at','update_at',
     ];
 
     // Dates

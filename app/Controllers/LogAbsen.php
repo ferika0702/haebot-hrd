@@ -62,17 +62,16 @@ class LogAbsen extends ResourceController
         if ($this->request->isAJAX()) {
             $validasi = [
                 'log_date'  => [
-                    'rules'     => 'required|is_unique[log_absen.log_date]',
+                    'rules'     => 'required',
                     'errors'    => [
                         'required' => 'tanggal harus diisi',
-                        'is_unique' => 'tanggal sudah ada'
+                        
                     ]
                 ],
                 'log_time'  => [
-                    'rules'     => 'required|is_unique[log_absen.log_time]',
+                    'rules'     => 'required',
                     'errors'    => [
                         'required' => 'waktu harus diisi',
-                        'is_unique' => 'waktu sudah ada'
                     ]
                 ]
             ];
@@ -100,7 +99,7 @@ class LogAbsen extends ResourceController
                 $modelLogAbsen->save($data);
 
                 $json = [
-                    'success' => 'Berhasil menambah data karyawan'
+                    'success' => 'Berhasil menambah data Log absen'
                 ];
                 
             }
@@ -113,18 +112,86 @@ class LogAbsen extends ResourceController
     
     public function edit($id = null)
     {
-        //
+        if ($this->request->isAJAX()) {
+            $modelLogAbsen = new LogAbsenModel();
+            $log      = $modelLogAbsen->find($id);
+
+            $data = [
+                'log' => $log,
+            ];
+            $json = [
+                'data' => view('absensi/log_absensi/edit', $data),
+            ];
+
+            echo json_encode($json);
+        } else {
+            return 'Tidak bisa load';
+        }
     }
 
     
     public function update($id = null)
     {
-        //
+        if ($this->request->isAJAX()) {
+            $validasi = [
+                'log_date'  => [
+                    'rules'     => 'required',
+                    'errors'    => [
+                        'required' => 'tanggal harus diisi',
+                    ]
+                ],
+                'log_time'  => [
+                    'rules'     => 'required|is_unique[log_absen.log_time]',
+                    'errors'    => [
+                        'required' => 'waktu harus diisi',
+                        'is_unique' => 'waktu sudah ada'
+                    ]
+                ]
+            ];
+
+            if (!$this->validate($validasi)) {
+                $validation = \Config\Services::validation();
+
+                $error = [
+                    'error_log_date' => $validation->getError('log_date'),
+                    'error_log_time' => $validation->getError('log_time'),
+                ];
+
+                $json = [
+                    'error' => $error
+                ];
+            }
+            else {
+                $modelLogAbsen = new LogAbsenModel();
+                $data = [
+                    'id' => $id,
+                    'id_absen' => $this->request->getPost('absen_id'),
+                    'log_date' => $this->request->getPost('log_date'),
+                    'log_time' => $this->request->getPost('log_time'),
+                ];
+                
+                $modelLogAbsen->save($data);
+
+                $json = [
+                    'success' => 'Berhasil Data data Log Absen'
+                ];
+                
+            }
+            echo json_encode($json);
+            } else {
+                return 'Tidak bisa load';
+            }
     }
 
     
     public function delete($id = null)
     {
-        //
+        $modelLogAbsen = new LogAbsenModel();
+
+
+        $modelLogAbsen->delete($id);
+
+        session()->setFlashdata('pesan', 'Data berhasil dihapus.');
+        return redirect()->back();
     }
 }
