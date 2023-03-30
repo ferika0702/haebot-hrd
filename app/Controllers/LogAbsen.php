@@ -3,16 +3,19 @@
 namespace App\Controllers;
 use App\Models\KaryawanAbsenModel;
 use App\Models\LogAbsenModel;
+use App\Models\KaryawanModel;
 
 use CodeIgniter\RESTful\ResourceController;
 
 class LogAbsen extends ResourceController
 {
     
-    public function index($id_karyawan_absen=null)
+    public function index($id_karyawan=null,$id_karyawan_absen=null)
     {
         $modelLogAbsen=new LogAbsenModel();
         $modelKaryawanAbsen = new KaryawanAbsenModel();
+        $modelKaryawan = new KaryawanModel;
+        $karyawan = $modelKaryawan->find($id_karyawan);
         $absen = $modelKaryawanAbsen->find($id_karyawan_absen);
         $log=$modelLogAbsen
             ->select('log_absen.*,karyawan_absen.id as absen_id')
@@ -22,6 +25,8 @@ class LogAbsen extends ResourceController
         $data=[
             'log'=>$log,
             'id_absen'=>$id_karyawan_absen,
+            'karyawan_name'=>$karyawan['nama_lengkap'],
+            'karyawan_id'=>$id_karyawan,
         ];
         return view('absensi/log_absensi/index', $data);
     }

@@ -14,14 +14,15 @@ class KaryawanAbsen extends ResourceController
         $modelKaryawanAbsen = new KaryawanAbsenModel();
         $karyawan = $modelKaryawan->find($id_karyawan);
         $absen=$modelKaryawanAbsen
-            ->select('karyawan_absen.*,karyawan.nama_lengkap,karyawan.id as karyawan_id')
+            ->select('karyawan_absen.id as ka_id,karyawan_absen.id_karyawan,karyawan_absen.tanggal_absen,karyawan_absen.status,karyawan.nama_lengkap,karyawan.id as karyawan_id')
             ->join('karyawan', 'karyawan_absen.id_karyawan = karyawan.id')
             ->where('karyawan_absen.id_karyawan',$id_karyawan)
             ->findAll();
         $data=[
             'absen'=>$absen,
             'id_karyawan'=>$id_karyawan,
-            'karyawan_name'=>$karyawan['nama_lengkap']
+            'karyawan_name'=>$karyawan['nama_lengkap'],
+            'karyawan_id' =>$karyawan,
         ];
         return view('absensi/karyawan_absensi/index', $data);
         // var_dump(json_encode($data));
@@ -63,10 +64,9 @@ class KaryawanAbsen extends ResourceController
         if ($this->request->isAJAX()) {
             $validasi = [
                 'tanggal_absen'  => [
-                    'rules'     => 'required|is_unique[karyawan_absen.tanggal_absen]',
+                    'rules'     => 'required',
                     'errors'    => [
                         'required' => 'tanggal_absen harus diisi',
-                        'is_unique' => 'tanggal sudah ada'
                     ]
                 ],
                 'status'  => [

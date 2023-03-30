@@ -24,7 +24,7 @@
                 <div class="card mb-3 shadow" style="border: 1px solid #1762A5;">
                     <h5 class="card-header" style="background-color: #1762A5; color: #fff;">Laporan</h5>
                     <div class="card-body text-secondary">
-                        <i class="fa-3x fa-solid fa-clipboard-check"></i>
+                    <i class="fa-3x fa-regular fa-note-sticky"></i>
                     </div>
                 </div>
             </a>

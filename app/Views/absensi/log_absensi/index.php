@@ -7,10 +7,10 @@
 
     <div class="d-flex mb-0">
         <div class="me-auto mb-1">
-            <h3 style="color: #566573;">Log Absensi</h3>
+            <h3 style="color: #566573;">Log Absensi <?= ucwords(strtolower($karyawan_name)) ?></h3>
         </div>
         <div class="me-2 mb-1">
-            <a class="btn btn-sm btn-outline-dark" href="<?= site_url() ?>view-absensi">
+            <a class="btn btn-sm btn-outline-dark" href="<?= site_url() ?>karyawan-absensi/<?=$karyawan_id?>">
                 <i class="fa-fw fa-solid fa-arrow-left"></i> Kembali
             </a>
         </div>
@@ -28,19 +28,30 @@
             <thead>
                 <tr>
                     <th class="text-center" width="5%">No</th>
-                    <th class="text-center" width="30%">Tanggal</th>
-                    <th class="text-center" width="25%">Waktu</th>
-                    <th class="text-center" width="10%">Aksi</th>
+                    <th class="text-center" width="40%">Tanggal</th>
+                    <th class="text-center" width="40%">Waktu</th>
+                    <th class="text-center" width="15%">Aksi</th>
                 </tr>
             </thead>
             <tbody>
             <?php $no = 1 ?>
-            <?php setlocale(LC_TIME, 'id_ID.utf8');?>
-            <?php echo setlocale(LC_TIME, 0); ?>
                 <?php foreach ($log as $absen) : ?>
+                    <?php
+                    $day = date('l', strtotime($absen['log_date']));
+                    $days = array(
+                        'Sunday'    => 'Minggu',
+                        'Monday'    => 'Senin',
+                        'Tuesday'   => 'Selasa',
+                        'Wednesday' => 'Rabu',
+                        'Thursday'  => 'Kamis',
+                        'Friday'    => 'Jumat',
+                        'Saturday'  => 'Sabtu'
+                    );
+                    ?>
                     <tr>
                         <td><?= $no++ ?></td>
-                        <td><?= strftime('%A, %e %B %Y', strtotime($absen['log_date'])) ?></td>
+                        
+                        <td><?= $days[$day],', ',$absen['log_date'] ?></td>
                         <td><?= $absen['log_time'] ?></td>
                         <td class="text-center">
                             <form id="form_delete" method="POST" class="d-inline">

@@ -28,20 +28,34 @@
             <thead>
                 <tr>
                     <th class="text-center" width="5%">No</th>
-                    <th class="text-center" width="35%">Tanggal</th>
-                    <th class="text-center" width="35%">Status</th>
-                    <th class="text-center" width="20%">Aksi</th>
+                    <th class="text-center" width="40%">Tanggal</th>
+                    <th class="text-center" width="40%">Waktu</th>
+                    <th class="text-center" width="15%">Aksi</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody>   
             <?php $no = 1 ?>
-                <?php foreach ($absen as $absen) : ?>
+            <?php ?>
+            <?php foreach ($absen as $absen) : ?>             
                     <tr>
                         <td><?= $no++ ?></td>
-                        <td><?= date('l, d M Y', strtotime($absen['tanggal_absen'])) ?></td>
+                        <?php
+                        $day = date('l', strtotime($absen['tanggal_absen']));
+                        $days = array(
+                            'Sunday'    => 'Minggu',
+                            'Monday'    => 'Senin',
+                            'Tuesday'   => 'Selasa',
+                            'Wednesday' => 'Rabu',
+                            'Thursday'  => 'Kamis',
+                            'Friday'    => 'Jumat',
+                            'Saturday'  => 'Sabtu'
+                            );
+                            ?>   
+                        
+                        <td><?= $days[$day],', ',$absen['tanggal_absen'] ?></td>
                         <td><?= $absen['status'] ?></td>
                         <td class="text-center">
-                        <a title="Log" class="px-2 py-0 btn btn-sm btn-outline-dark" href="<?= site_url() ?>log-absensi/<?= $absen['id'] ?>">
+                        <a title="Log" class="px-2 py-0 btn btn-sm btn-outline-dark" href="<?= site_url() ?>log-absensi/<?= $karyawan_id['id'] ?>/<?= $absen['ka_id'] ?>">
                                 <i class="fa-fw fa-regular fa-clipboard"></i>
                             </a>
                         </td>
@@ -123,7 +137,7 @@
                 if (res.data) {
                     $('#isiForm').html(res.data)
                     $('#my-modal').modal('toggle')
-                    $('#judulModal').html('Tambah permission')
+                    $('#judulModal').html('Tambah Absensi')
                 }
             },
             error: function(e) {

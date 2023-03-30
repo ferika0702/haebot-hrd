@@ -100,7 +100,7 @@ $routes->set404Override();
     $routes->post('karyawan-absen/create', 'KaryawanAbsen::create', ['filter' => 'permission:SDM']);
 
     //log absen
-    $routes->get('log-absensi/(:num)', 'LogAbsen::index/$1', ['filter' => 'permission:SDM']);
+    $routes->get('log-absensi/(:num)/(:num)', 'LogAbsen::index/$1/$2', ['filter' => 'permission:SDM']);
     $routes->post('log-absen-new', 'LogAbsen::new', ['filter' => 'permission:SDM']);
     $routes->post('log-absen/create', 'LogAbsen::create', ['filter' => 'permission:SDM']);
     $routes->delete('log-absen/(:num)', 'LogAbsen::delete/$1', ['filter' => 'permission:SDM']);
