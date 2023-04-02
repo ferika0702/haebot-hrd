@@ -4,7 +4,6 @@
 
 
 <main class="p-md-3 p-2">
-
     <div class="d-flex mb-0">
         <div class="me-auto mb-1">
             <h3 style="color: #566573;">User Permission <?= ucwords(strtolower($nama_user)) ?></h3>
@@ -23,49 +22,61 @@
 
     <hr class="mt-0 mb-4">
 
-    <div class="table-responsive">
+    <div class="container">
+        <div class="row align-items-start">
+            <div class="col">
+                <div class="">
         <table class="table table-hover table-striped table-bordered" width="100%" id="tabel">
             <thead>
                 <tr>
                     <th class="text-center" width="5%">No</th>
-                    <th class="text-center" width="30%">Nama Grup</th>
-                    <th class="text-center" width="25%">Deskripsi</th>
-                    <th class="text-center" width="15%">Aksi</th>
+                    <th class="text-center" width="30%">Nama Permission</th>
+                    <th class="text-center" width="10%">Aksi</th>
                 </tr>
             </thead>
             <tbody>
             <?php $no = 1 ?>
-                <?php foreach ($user as $user) : ?>
+                <?php foreach ($user_permission as $us) : ?>
                     <tr>
                         <td><?= $no++ ?></td>
-                        <td><?= $user['name'] ?></td>
-                        <td><?= $user['description'] ?></td>
+                        <td><?= $us['name']?></td>
                         <td class="text-center">
                         <form id="form_delete" method="POST" class="d-inline">
                             <input type="hidden" name="_method" value="DELETE">
                         </form>
-                        <button onclick="confirm_delete(<?= $user['permission_id']?>,<?=$id_user?>)" title="Hapus" type="button" class="px-2 py-0 btn btn-sm btn-outline-danger">
+                        <button onclick="confirm_delete(<?= $us['id']?>,<?=$id_user?>)" title="Hapus" type="button" class="px-2 py-0 btn btn-sm btn-outline-danger">
                         <i class="fa-fw fa-solid fa-trash"></i>
                         </button>
                         </td>
                     </tr>
                 <?php endforeach; ?>
-                </tr>
             </tbody>
         </table>
-
-        <table class="table table-hover table-striped table-bordered" width="100%" id="tabel">
+    </div>
+    </div>
+    <div class="col">
+        <div class="">
+            <table class="table table-hover table-striped table-bordered" width="100%" id="tabel">
             <thead>
                 <tr>
                     <th class="text-center" width="5%">No</th>
-                    <th class="text-center" width="30%">Nama Grup</th>
-                    <th class="text-center" width="25%">Deskripsi</th>
-                    <th class="text-center" width="15%">Aksi</th>
+                    <th class="text-center" width="30%">Nama Permission</th>
                 </tr>
             </thead>
+            <tbody>
+            <?php $no = 1 ?>
+                <?php foreach ($group_permission as $gp) : ?>
+                    <tr>
+                        <td ><?= $no++ ?></td>
+                        <td ><?= $gp['name']?></td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
         </table>
+        </div>
     </div>
-
+  </div>
+</div>
 </main>
 
 <?= $this->include('MyLayout/js') ?>
@@ -76,7 +87,7 @@
     <div class="modal-dialog modal-lg modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="judulModal">Tambah user</h1>
+                <h1 class="modal-title fs-5" id="judulModal">Tambah Permission</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body" id="isiForm">
@@ -95,7 +106,7 @@
         toast: true,
         position: 'top-end',
         showConfirmButton: false,
-        timer: 5000,
+        timer: 3000,
         timerProgressBar: true,
         background: '#EC7063',
         color: '#fff',
@@ -108,7 +119,7 @@
         
 
     $(document).ready(function() {
-        $('#tabel').DataTable();
+        
 
         // Alert
         var op = <?= (!empty(session()->getFlashdata('pesan')) ? json_encode(session()->getFlashdata('pesan')) : '""'); ?>;

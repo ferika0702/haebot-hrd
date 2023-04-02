@@ -109,4 +109,27 @@ class PermissionModel extends Model
             'description' => $faker->sentence,
         ]);
     }
+
+    public function getDataPermissionUser(int $userId):array
+    {
+        $fromUser = $this->db->table('auth_users_permissions')
+                ->select('id, auth_permissions.name')
+                ->join('auth_permissions', 'auth_permissions.id = permission_id', 'inner')
+                ->where('user_id', $userId)
+                ->get()
+                ->getResultArray();
+                return $fromUser;
+                
+    }
+    public function getDataPermissionGroup(int $userId):array
+    {
+        $fromGroup = $this->db->table('auth_groups_users')
+                ->select('auth_permissions.id, auth_permissions.name')
+                ->join('auth_groups_permissions', 'auth_groups_permissions.group_id = auth_groups_users.group_id', 'inner')
+                ->join('auth_permissions', 'auth_permissions.id = auth_groups_permissions.permission_id', 'inner')
+                ->where('user_id', $userId)
+                ->get()
+                ->getResultArray();
+                return $fromGroup;
+    }
 }

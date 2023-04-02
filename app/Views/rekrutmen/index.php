@@ -25,7 +25,7 @@
                     <th class="text-center" width="5%">No</th>
                     <th class="text-center" width="30%">Nama</th>
                     <th class="text-center" width="10%">Pendidikan</th>
-                    <th class="text-center" width="10%">No Telepon</th>
+                    <th class="text-center" width="20%">Telp</th>
                     <th class="text-center" width="20%">Email</th>
                     <th class="text-center" width="15%">Aksi</th>
                 </tr>

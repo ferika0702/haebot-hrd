@@ -13,26 +13,25 @@ use CodeIgniter\RESTful\ResourceController;
 class UserPermission extends ResourceController
 {
     
-    public function index($id_user = null)
+    public function index($userId = null)
     {
         $modelPermission = new PermissionModel();
         $modelUser = new UserModel();
         $modelUserPermission = new UserPermissionModel();
-        $user = $modelUser->find($id_user);
+        $user = $modelUser->find($userId);
         $permission = $modelPermission->findAll();
-        $userpermission = $modelUserPermission
-        ->select('ap.id,ap.name, ap.description,auth_users_permissions.permission_id,auth_users_permissions.user_id')
-        ->join('auth_permissions ap', 'auth_users_permissions.permission_id = ap.id','LEFT')
-        ->where('auth_users_permissions.user_id', $id_user)
-        ->findAll();
+        $userpermission = $modelPermission->getDataPermissionUser($userId);
+        $grouppermission = $modelPermission->getDataPermissionGroup($userId);
+        // dd($userpermission);
         $data = [
-            
-            'user' => $userpermission ,
-            'id_user'=>$id_user,
+            'user_permission' => $userpermission,
+            'group_permission' => $grouppermission,
+            'id_user'=>$userId,
             'permission'=>$permission,
             'nama_user' => $user->name
         ];
         return view('user/user_permission/index', $data);
+        // var_dump(($data['user_permission']));
     }
 
     
@@ -123,11 +122,11 @@ class UserPermission extends ResourceController
     }
 
     
-    public function delete($permission_id = null,$user_id = null)
+    public function delete($permission_id = null, $user_id = null)
     {
-        $modelUserPermission = new UserPermissionModel();
-
-        $modelUserPermission->where(['permission_id' => $permission_id, 'user_id' => $user_id])->delete();
+        $modelUserPermission = new PermissionModel();
+        
+        $modelUserPermission->removePermissionFromUser(intval($permission_id),intval($user_id));
     
         session()->setFlashdata('pesan', 'Data berhasil dihapus.');
         return redirect()->back();
