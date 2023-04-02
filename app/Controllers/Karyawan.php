@@ -74,9 +74,10 @@ class Karyawan extends ResourceController
 
             $validasi = [
                 'nik'  => [
-                    'rules'     => 'required|is_unique[karyawan.nik]',
+                    'rules'     => 'required|is_unique[karyawan.nik]|exact_length[16]',
                     'errors'    => [
-                        'required' => 'nik harus diisi',
+                        'required' => 'nik harus diisi dan sesuai aturan 16 angka',
+                        'exact_length' =>'harus sesuai aturan 16 angka'
                     ]
                 ],
                 'jabatan'  => [
@@ -128,9 +129,10 @@ class Karyawan extends ResourceController
                     ]
                 ],
                 'no_telp'  => [
-                    'rules'     => 'required',
+                    'rules'     => 'required|min_length[11]',
                     'errors'    => [
-                        'required' => 'no telepon harus diisi',
+                        'required' => 'no telepon harus diisi dan minimal 11 angka',
+                        'min_length' =>'minimal harus 11 angka'
                     ]
                 ],
                 'email'  => [
@@ -243,9 +245,10 @@ class Karyawan extends ResourceController
 
         $validasi = [
             'nik'  => [
-                'rules'     => 'required',
+                'rules'     => 'required|exact_length[16]',
                 'errors'    => [
-                    'required' => 'nik harus diisi',
+                    'required' => 'nik harus diisi dan sesuai aturan 16 angka',
+                    'exact_length' => 'harus sesuai aturan 16 angka',
                 ]
             ],
             'jabatan'  => [
@@ -297,13 +300,14 @@ class Karyawan extends ResourceController
                 ]
             ],
             'no_telp'  => [
-                'rules'     => 'required',
+                'rules'     => 'required|min_length[11]',
                 'errors'    => [
-                    'required' => 'no telepon harus diisi',
+                    'required' => 'no telepon harus diisi dan minimal 11 angka',
+                    'min_length' =>'minimal harus 11 angka'
                 ]
             ],
             'email'  => [
-                'rules'     => 'required',
+                'rules'     => 'required|valid_email',
                 'errors'    => [
                     'required' => 'email harus diisi',
                 ]
