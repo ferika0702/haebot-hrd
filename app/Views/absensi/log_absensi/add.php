@@ -1,20 +1,33 @@
 <form autocomplete="off" class="row g-3 mt-2" action="<?= site_url() ?>log-absen/create" method="POST" id="form">
     <?= csrf_field() ?>
+    <?php 
+    $today = date('Y-m-d');
+    ?>
     <div class="row mb-3">
         <label for="log_date" class="col-sm-3 col-form-label">Tanggal</label>
         <div class="col-sm-9">
-            <input type="text" class="form-control" id="log_date" name="log_date" autofocus>
+            <input value="<?php echo $today; ?>" type="text" class="form-control" id="log_date" name="log_date" autofocus>
             <div class="invalid-feedback error-log_date"></div>
         </div>
     </div>
     <div class="row mb-3">
         <label for="log_time" class="col-sm-3 col-form-label">Waktu Absen</label>
         <div class="col-sm-9">
-            <input type="time" class="form-control" id="log_time" name="log_time" autofocus>
+            <input value='now' type="time" class="form-control" id="log_time" name="log_time" autofocus>
             <div class="invalid-feedback error-log_time"></div>
         </div>
     </div>
-    
+    <div class="row mb-3">
+        <label for="keterangan" class="col-sm-3 col-form-label">Keterangan</label>
+        <div class="col-sm-9">
+            <select class="form-control" name="keterangan" id="keterangan">
+                <option value=""></option>
+                <option value="Masuk">Masuk</option>
+                <option value="Pulang">Pulang</option>
+            </select>
+            <div class="invalid-feedback error-keterangan"></div>
+        </div>
+    </div>
     </div>
     <input type="hidden" name="absen_id" value=<?=$id_absen?>>
 
@@ -26,6 +39,16 @@
 
 
 <script>
+    $(function(){
+        var d = new Date(),        
+        h = d.getHours(),
+        m = d.getMinutes();
+        if(h < 10) h = '0' + h; 
+        if(m < 10) m = '0' + m; 
+        $('input[type="time"][value="now"]').each(function(){ 
+            $(this).attr({'value': h + ':' + m});
+        });
+    });
     $('#form').submit(function(e) {
         e.preventDefault();
         $.ajax({
@@ -59,6 +82,14 @@
                         $('.error-log_time').html('');
                         $('#log_time').removeClass('is-invalid');
                         $('#log_time').addClass('is-valid');
+                    }
+                    if (err.error_keterangan) {
+                        $('.error-keterangan').html(err.error_keterangan);
+                        $('#keterangan').addClass('is-invalid');
+                    } else {
+                        $('.error-keterangan').html('');
+                        $('#keterangan').removeClass('is-invalid');
+                        $('#keterangan').addClass('is-valid');
                     }
                 }
                 if (response.success) {

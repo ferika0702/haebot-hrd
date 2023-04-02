@@ -7,7 +7,7 @@
 
     <div class="d-flex mb-0">
         <div class="me-auto mb-1">
-            <h3 style="color: #566573;">Log Absensi <?= ucwords(strtolower($karyawan_name)) ?></h3>
+            <h3 style="color: #566573;">Log Absensi <?= ucwords(strtolower($karyawan_name))?>, <?=$tanggal_absen?></h3>
         </div>
         <div class="me-2 mb-1">
             <a class="btn btn-sm btn-outline-dark" href="<?= site_url() ?>karyawan-absensi/<?=$karyawan_id?>">
@@ -28,8 +28,9 @@
             <thead>
                 <tr>
                     <th class="text-center" width="5%">No</th>
-                    <th class="text-center" width="40%">Tanggal</th>
-                    <th class="text-center" width="40%">Waktu</th>
+                    <th class="text-center" width="30%">Tanggal</th>
+                    <th class="text-center" width="20%">Keterangan</th>
+                    <th class="text-center" width="30%">Waktu</th>
                     <th class="text-center" width="15%">Aksi</th>
                 </tr>
             </thead>
@@ -52,6 +53,7 @@
                         <td><?= $no++ ?></td>
                         
                         <td><?= $days[$day],', ',$absen['log_date'] ?></td>
+                        <td><?= $absen['keterangan'] ?></td>
                         <td><?= $absen['log_time'] ?></td>
                         <td class="text-center">
                             <form id="form_delete" method="POST" class="d-inline">

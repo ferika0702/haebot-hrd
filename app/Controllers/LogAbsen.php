@@ -27,6 +27,7 @@ class LogAbsen extends ResourceController
             'id_absen'=>$id_karyawan_absen,
             'karyawan_name'=>$karyawan['nama_lengkap'],
             'karyawan_id'=>$id_karyawan,
+            'tanggal_absen'=>$absen['tanggal_absen']
         ];
         return view('absensi/log_absensi/index', $data);
     }
@@ -78,6 +79,12 @@ class LogAbsen extends ResourceController
                     'errors'    => [
                         'required' => 'waktu harus diisi',
                     ]
+                ],
+                'keterangan'=>[
+                    'rules'     => 'required',
+                    'errors'    => [
+                        'required' => 'keterangan harus diisi',
+                    ]
                 ]
             ];
 
@@ -87,6 +94,7 @@ class LogAbsen extends ResourceController
                 $error = [
                     'error_log_date' => $validation->getError('log_date'),
                     'error_log_time' => $validation->getError('log_time'),
+                    'error_keterangan' => $validation->getError('keterangan'),
                 ];
 
                 $json = [
@@ -99,6 +107,7 @@ class LogAbsen extends ResourceController
                     'id_absen' => $this->request->getPost('absen_id'),
                     'log_date' => $this->request->getPost('log_date'),
                     'log_time' => $this->request->getPost('log_time'),
+                    'keterangan' => $this->request->getPost('keterangan'),
                 ];
                 
                 $modelLogAbsen->save($data);

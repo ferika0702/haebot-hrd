@@ -26,6 +26,10 @@ class LogAbsen extends Migration
             'log_date' =>[
                 'type'           => 'DATE',
             ],
+            'keterangan'=>[
+                'type'           => 'ENUM',
+                'constraint'     => "'MASUK','PULANG'",
+            ]
         ]);
         $this->forge->addKey('id', true);
         $this->forge->addForeignKey('id_absen', 'karyawan_absen', 'id', 'CASCADE', 'CASCADE');

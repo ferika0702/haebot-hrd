@@ -1,13 +1,16 @@
 <form autocomplete="off" class="row g-3 mt-2" action="<?= site_url() ?>karyawan-absen/create" method="POST" id="form">
     <?= csrf_field() ?>
+    <?php 
+    $today = date('Y-m-d');
+    ?>
     <div class="row mb-3">
         <label for="tanggal_absen" class="col-sm-3 col-form-label">Tanggal</label>
         <div class="col-sm-9">
-            <input type="text" class="form-control" id="tanggal_absen" name="tanggal_absen" autofocus>
+            <input value="<?php echo $today; ?>" type="text" class="form-control" id="tanggal_absen" name="tanggal_absen" autofocus>
             <div class="invalid-feedback error-tanggal_absen"></div>
         </div>
     </div>
-        <div class="row mb-3">
+    <div class="row mb-3">
         <label for="status" class="col-sm-3 col-form-label">Status</label>
         <div class="col-sm-9">
             <select class="form-control" name="status" id="status">

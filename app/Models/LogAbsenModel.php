@@ -15,7 +15,7 @@ class LogAbsenModel extends Model
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
     protected $allowedFields    = [
-        'id_absen','log_time','log_date'
+        'id_absen','log_time','log_date','keterangan'
     ];
 
     // Dates
