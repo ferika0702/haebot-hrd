@@ -4,7 +4,7 @@
 
 
 <main class="p-md-3 p-2">
-    <h3 style="color: #566573;">Pengaturan User dan Group</h3>
+    <h3 style="color: #566573;">Menu Absensi Karyawan</h3>
 
     <hr>
 

@@ -29,7 +29,7 @@
                 <tr>
                     <th class="text-center" width="5%">No</th>
                     <th class="text-center" width="40%">Tanggal</th>
-                    <th class="text-center" width="40%">Waktu</th>
+                    <th class="text-center" width="40%">Status</th>
                     <th class="text-center" width="15%">Aksi</th>
                 </tr>
             </thead>
@@ -55,9 +55,14 @@
                         <td><?= $days[$day],', ',$absen['tanggal_absen'] ?></td>
                         <td><?= $absen['status'] ?></td>
                         <td class="text-center">
-                        <a title="Log" class="px-2 py-0 btn btn-sm btn-outline-dark" href="<?= site_url() ?>log-absensi/<?= $karyawan_id['id'] ?>/<?= $absen['ka_id'] ?>">
-                                <i class="fa-fw fa-regular fa-clipboard"></i>
-                            </a>
+                            <?php if ($absen['status'] == 'MASUK') : ?>
+                                <a title="Log" class="px-2 py-0 btn btn-sm btn-outline-dark" href="<?= site_url() ?>log-absensi/<?= $karyawan_id['id'] ?>/<?= $absen['ka_id'] ?>">
+                                    <i class="fa-fw fa-regular fa-clipboard"></i>
+                                </a>
+                            <?php else : ?>
+                                <a title="Log" class="px-2 py-0 btn btn-sm btn-outline-dark">
+                                <i class="fa-fw fa-regular fa-clipboard" onclick="showAlert()"></i>
+                            <?php endif; ?>
                         </td>
                     </tr>
                 <?php endforeach; ?>
@@ -145,6 +150,14 @@
             }
         })
     }
+
+    function showAlert() {
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Yang bisa mengkakses halaman log absensi hanya karyawan dengan status masuk saja!',
+        });
+        }
 </script>
 
 <?= $this->endSection() ?>

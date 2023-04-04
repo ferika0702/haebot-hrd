@@ -28,7 +28,6 @@
             <thead>
                 <tr>
                     <th class="text-center" width="5%">No</th>
-                    <th class="text-center" width="30%">Tanggal</th>
                     <th class="text-center" width="20%">Keterangan</th>
                     <th class="text-center" width="30%">Waktu</th>
                     <th class="text-center" width="15%">Aksi</th>
@@ -51,8 +50,6 @@
                     ?>
                     <tr>
                         <td><?= $no++ ?></td>
-                        
-                        <td><?= $days[$day],', ',$absen['log_date'] ?></td>
                         <td><?= $absen['keterangan'] ?></td>
                         <td><?= $absen['log_time'] ?></td>
                         <td class="text-center">
@@ -69,6 +66,13 @@
                 <?php endforeach; ?>
                 </tr>
             </tbody>
+            <tr>
+                        <td colspan="4">
+                            <?php foreach ($total as $minutes): ?>
+                            Total Menit Masuk Karyawan : <h4><?= $minutes ?> menit</h4>
+                            <?php endforeach; ?>
+                        </td>
+                    </tr>
         </table>
     </div>
 
