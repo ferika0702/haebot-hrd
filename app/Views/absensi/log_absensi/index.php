@@ -67,12 +67,11 @@
                 </tr>
             </tbody>
             <tr>
-                        <td colspan="4">
-                            <?php foreach ($total as $minutes): ?>
-                            Total Menit Masuk Karyawan : <h4><?= $minutes ?> menit</h4>
-                            <?php endforeach; ?>
-                        </td>
-                    </tr>
+            <td colspan="4">
+                    Total Menit Masuk Karyawan : <h4><?= $total ?> menit</h4>
+                </td>
+            </tr>
+            <tr>
         </table>
     </div>
 

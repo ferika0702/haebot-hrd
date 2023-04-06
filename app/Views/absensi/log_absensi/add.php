@@ -24,6 +24,7 @@
                 <option value=""></option>
                 <option value="Masuk">Masuk</option>
                 <option value="Pulang">Pulang</option>
+                <option value="Lembur">Lembur</option>
             </select>
             <div class="invalid-feedback error-keterangan"></div>
         </div>

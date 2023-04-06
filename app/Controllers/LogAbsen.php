@@ -17,27 +17,12 @@ class LogAbsen extends ResourceController
         $modelKaryawan = new KaryawanModel;
         $karyawan = $modelKaryawan->find($id_karyawan);
         $absen = $modelKaryawanAbsen->find($id_karyawan_absen);
+        $total_minutes = $modelLogAbsen->getTotalMinutes($id_karyawan_absen);
         $log=$modelLogAbsen
             ->select('log_absen.*,karyawan_absen.id as absen_id')
             ->join('karyawan_absen', 'log_absen.id_absen=karyawan_absen.id')
             ->where('log_absen.id_absen',$id_karyawan_absen)
             ->findAll();
-            $total_minutes = array();
-            foreach ($log as $row) {
-                if ($row['keterangan'] == 'Masuk') {
-                    $time_in = strtotime($row['log_time']);
-                } else if ($row['keterangan'] == 'Pulang') {
-                    $time_out = strtotime($row['log_time']);
-                    $diff_minutes = round(($time_out - $time_in) / 60);
-                    $id = $row['id'];
-                    if (!isset($total_minutes[$id_karyawan_absen])) {
-                        $total_minutes[$id_karyawan_absen] = 0;
-                    }
-                    $total_minutes[$id_karyawan_absen] += $diff_minutes;
-                }
-            }
-
-            // dd($total_minutes);
         $data=[
             'log'=>$log,
             'total' => $total_minutes,

@@ -28,7 +28,7 @@ class LogAbsen extends Migration
             ],
             'keterangan'=>[
                 'type'           => 'ENUM',
-                'constraint'     => "'MASUK','PULANG'",
+                'constraint'     => "'Masuk','Pulang','Lembur'",
             ]
         ]);
         $this->forge->addKey('id', true);
