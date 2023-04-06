@@ -27,7 +27,6 @@ class GroupPermission extends ResourceController
             'nama_group' => $group['name']
         ];
         return view('user/group_permission/index', $data);
-        // var_dump(json_encode($data));
     }
 
     

@@ -25,7 +25,6 @@ class KaryawanAbsen extends ResourceController
             'karyawan_id' =>$karyawan,
         ];
         return view('absensi/karyawan_absensi/index', $data);
-        // var_dump(json_encode($data));
     }
 
     

@@ -30,7 +30,6 @@ class ListGroup extends ResourceController
             'nama_group' => $group['name']
         ];
         return view('user/group/index', $data);
-        // var_dump($data);
     }
 
     

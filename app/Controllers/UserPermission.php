@@ -22,7 +22,6 @@ class UserPermission extends ResourceController
         $permission = $modelPermission->findAll();
         $userpermission = $modelPermission->getDataPermissionUser($userId);
         $grouppermission = $modelPermission->getDataPermissionGroup($userId);
-        // dd($userpermission);
         $data = [
             'user_permission' => $userpermission,
             'group_permission' => $grouppermission,
@@ -31,7 +30,6 @@ class UserPermission extends ResourceController
             'nama_user' => $user->name
         ];
         return view('user/user_permission/index', $data);
-        // var_dump(($data['user_permission']));
     }
 
     

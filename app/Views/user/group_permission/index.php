@@ -16,7 +16,7 @@
         </div>
         <div class="mb-1">
             <a class="btn btn-sm btn-outline-secondary mb-3" id="tombolTambah">
-                <i class="fa-fw fa-solid fa-plus"></i> Tambah User
+                <i class="fa-fw fa-solid fa-plus"></i> Tambah Permission
             </a>
         </div>
     </div>
