@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\DivisiModel;
+use App\Models\KaryawanModel;
 use CodeIgniter\RESTful\ResourcePresenter;
 
 class Divisi extends ResourcePresenter
@@ -196,7 +197,7 @@ class Divisi extends ResourcePresenter
         }
         return redirect()->to('/divisi');
     }
-
+    
 
     public function delete($id = null)
     {
@@ -206,5 +207,5 @@ class Divisi extends ResourcePresenter
 
         session()->setFlashdata('pesan', 'Data berhasil dihapus.');
         return redirect()->to('/divisi');
-    }
+    }    
 }

@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Models\KaryawanModel;
 use App\Models\UserModel;
 use CodeIgniter\RESTful\ResourceController;
+use \Hermawan\DataTables\DataTable;
 use Myth\Auth\Password;
 
 class Karyawan extends ResourceController
@@ -73,9 +74,10 @@ class Karyawan extends ResourceController
 
             $validasi = [
                 'nik'  => [
-                    'rules'     => 'required|is_unique[karyawan.nik]',
+                    'rules'     => 'required|is_unique[karyawan.nik]|exact_length[16]',
                     'errors'    => [
-                        'required' => 'nik harus diisi',
+                        'required' => 'nik harus diisi dan sesuai aturan 16 angka',
+                        'exact_length' =>'harus sesuai aturan 16 angka'
                     ]
                 ],
                 'jabatan'  => [
@@ -127,9 +129,10 @@ class Karyawan extends ResourceController
                     ]
                 ],
                 'no_telp'  => [
-                    'rules'     => 'required',
+                    'rules'     => 'required|min_length[11]',
                     'errors'    => [
-                        'required' => 'no telepon harus diisi',
+                        'required' => 'no telepon harus diisi dan minimal 11 angka',
+                        'min_length' =>'minimal harus 11 angka'
                     ]
                 ],
                 'email'  => [
@@ -179,8 +182,8 @@ class Karyawan extends ResourceController
                 $modelUser = new UserModel();
 
                 $data1 = [
-                    'id_grup' => 1,
-                    'id_divisi' => 1,
+                    'id_grup' => null,
+                    'id_divisi' => null,
                     'nik' => $this->request->getPost('nik'),
                     'jabatan' => $this->request->getPost('jabatan'),
                     'nama_lengkap' => $this->request->getPost('nama_lengkap'),
@@ -205,7 +208,6 @@ class Karyawan extends ResourceController
                     'active' => 1
                 ];
                 $modelUser->save($data2);
-
                 $json = [
                     'success' => 'Berhasil menambah data karyawan'
                 ];
@@ -243,9 +245,10 @@ class Karyawan extends ResourceController
 
         $validasi = [
             'nik'  => [
-                'rules'     => 'required',
+                'rules'     => 'required|exact_length[16]',
                 'errors'    => [
-                    'required' => 'nik harus diisi',
+                    'required' => 'nik harus diisi dan sesuai aturan 16 angka',
+                    'exact_length' => 'harus sesuai aturan 16 angka',
                 ]
             ],
             'jabatan'  => [
@@ -297,13 +300,14 @@ class Karyawan extends ResourceController
                 ]
             ],
             'no_telp'  => [
-                'rules'     => 'required',
+                'rules'     => 'required|min_length[11]',
                 'errors'    => [
-                    'required' => 'no telepon harus diisi',
+                    'required' => 'no telepon harus diisi dan minimal 11 angka',
+                    'min_length' =>'minimal harus 11 angka'
                 ]
             ],
             'email'  => [
-                'rules'     => 'required',
+                'rules'     => 'required|valid_email',
                 'errors'    => [
                     'required' => 'email harus diisi',
                 ]

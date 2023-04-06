@@ -4,19 +4,18 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class KaryawanModel extends Model
+class KaryawanDivisiModel extends Model
 {
     protected $DBGroup          = 'default';
-    protected $table            = 'karyawan';
+    protected $table            = 'karyawan_divisi';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $insertID         = 0;
     protected $returnType       = 'array';
-    protected $useSoftDeletes   = true;
+    protected $useSoftDeletes   = false;
     protected $protectFields    = true;
     protected $allowedFields    = [
-        'id_grup', 'id_divisi', 'nik', 'jabatan', 'nama_lengkap', 'alamat', 'jenis_kelamin', 'tempat_lahir', 'tanggal_lahir', 'agama',
-        'pendidikan', 'no_telp', 'email', 'created_at', 'updated_at', 'deleted_at',
+        'id_karyawan','id_divisi','created_at','update_at',
     ];
 
     // Dates
@@ -42,5 +41,4 @@ class KaryawanModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
-    
 }

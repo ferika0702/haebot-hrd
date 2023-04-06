@@ -4,23 +4,22 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class KaryawanModel extends Model
+class GroupUserModel extends Model
 {
     protected $DBGroup          = 'default';
-    protected $table            = 'karyawan';
+    protected $table            = 'auth_groups_users';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $insertID         = 0;
     protected $returnType       = 'array';
-    protected $useSoftDeletes   = true;
+    protected $useSoftDeletes   = false;
     protected $protectFields    = true;
     protected $allowedFields    = [
-        'id_grup', 'id_divisi', 'nik', 'jabatan', 'nama_lengkap', 'alamat', 'jenis_kelamin', 'tempat_lahir', 'tanggal_lahir', 'agama',
-        'pendidikan', 'no_telp', 'email', 'created_at', 'updated_at', 'deleted_at',
+        'group_id','user_id'
     ];
 
     // Dates
-    protected $useTimestamps = true;
+    protected $useTimestamps = false;
     protected $dateFormat    = 'datetime';
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
@@ -42,5 +41,4 @@ class KaryawanModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
-    
 }
