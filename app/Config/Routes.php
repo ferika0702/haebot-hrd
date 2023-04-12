@@ -92,9 +92,10 @@ $routes->set404Override();
     $routes->resource('rekrutmen', ['filter' => 'permission:SDM']);
 
     //absensi
-    $routes->get('view-absensi', 'Absensi::viewAbsensi', ['filter' => 'permission:SDM']);
-    $routes->get('view-laporan', 'Absensi::viewLaporan', ['filter' => 'permission:SDM']);
     $routes->resource('absensi', ['filter' => 'permission:SDM']);
+    $routes->get('view-absensi', 'Absensi::viewAbsensi', ['filter' => 'permission:SDM']);
+    $routes->post('view-absensi-filter', 'Absensi::viewAbsensi', ['filter' => 'permission:SDM']);
+    $routes->get('view-laporan', 'Absensi::viewLaporan', ['filter' => 'permission:SDM']);
     $routes->get('karyawan-absensi/(:num)', 'KaryawanAbsen::index/$1', ['filter' => 'permission:SDM']);
     $routes->post('karyawan-absen-new', 'KaryawanAbsen::new', ['filter' => 'permission:SDM']);
     $routes->post('karyawan-absen/create', 'KaryawanAbsen::create', ['filter' => 'permission:SDM']);
@@ -104,6 +105,19 @@ $routes->set404Override();
     $routes->post('log-absen-new', 'LogAbsen::new', ['filter' => 'permission:SDM']);
     $routes->post('log-absen/create', 'LogAbsen::create', ['filter' => 'permission:SDM']);
     $routes->delete('log-absen/(:num)', 'LogAbsen::delete/$1', ['filter' => 'permission:SDM']);
+
+    //pelanggaran
+    $routes->resource('pelanggaran', ['filter' => 'permission:SDM']);
+    
+    //pelanggaran karywan
+    $routes->get('pelanggaran-karyawan/', 'Pelanggaran::ViewKaryawan', ['filter' => 'permission:SDM']);
+    $routes->get('menu-pelanggaran/', 'Pelanggaran::ViewMenu', ['filter' => 'permission:SDM']);
+    
+    //point pelanggaran
+    $routes->get('point-pelanggaran/(:num)', 'PointPelanggaran::index/$1', ['filter' => 'permission:SDM']);
+    $routes->post('point-pelanggaran/new', 'PointPelanggaran::new', ['filter' => 'permission:SDM']);
+    $routes->post('point-pelanggaran/create', 'PointPelanggaran::create', ['filter' => 'permission:SDM']);
+    $routes->delete('point-pelanggaran-delete/(:num)', 'PointPelanggaran::delete/$1', ['filter' => 'permission:SDM']);
     
 });
 

@@ -4,30 +4,19 @@
 
 
 <main class="p-md-3 p-2">
+
+
     <div class="d-flex mb-0">
         <div class="me-auto mb-1">
-            <h3 style="color: #566573;">Absensi Karyawan</h3>
+            <h3 style="color: #566573;">Nama Karyawan</h3>
+        </div>
+        <div class="me-2 mb-1">
+            <a class="btn btn-sm btn-outline-dark" href="<?= site_url() ?>menu-pelanggaran">
+                <i class="fa-fw fa-solid fa-arrow-left"></i> Kembali
+            </a>
         </div>
     </div>
-    <form action="<?= site_url('view-absensi-filter') ?>" method="POST">
-        <div class="d-flex mb-1">
-            <label class="me-2">Filter Tanggal:</label>
-            <select name="bulan" id="bulan" class="form-select me-2">
-                <option value="">Pilih Bulan</option>
-                <?php for ($i = 1; $i <= 12; $i++) : ?>
-                    <option value="<?= $i ?>"><?= date("F", strtotime("2001-$i-01")) ?></option>
-                <?php endfor; ?>
-            </select>
-            <select id="tahun"name="tahun" class="form-select me-2">
-                <option value="">Pilih Tahun</option>
-                <?php for ($i = date('Y'); $i >= 2020; $i--) : ?>
-                    <option value="<?= $i ?>"><?= $i ?></option>
-                <?php endfor; ?>
-            </select>
-            <button type="submit" class="btn btn-primary">Filter</button>
-        </div>
-    </form>
-        
+
     <hr class="mt-0 mb-4">
 
     <div class="table-responsive">
@@ -35,29 +24,29 @@
             <thead>
                 <tr>
                     <th class="text-center" width="5%">No</th>
-                    <th class="text-center" width="50%">Nama Karyawan</th>
-                    <th class="text-center" width="30%">Total Menit</th>
+                    <th class="text-center" width="35%">Nama Karyawan</th>
                     <th class="text-center" width="15%">Aksi</th>
                 </tr>
             </thead>
             <tbody>
                 <?php $no = 1 ?>
-                <?php foreach ($karyawan as $sp) : ?>
+                <?php foreach ($karyawan as $kar) : ?>
                     <tr>
                         <td><?= $no++ ?></td>
-                        <td><?= $sp['nama_lengkap'] ?></td>
-                        <td class="text-center"><?= $sp['total_menit'],' ','Menit' ?></td>
+                        <td><?= $kar['nama_lengkap'] ?></td>
                         <td class="text-center">
-                            <a title="List" class="px-2 py-0 btn btn-sm btn-outline-dark" href="<?= site_url() ?>karyawan-absensi/<?= $sp['id'] ?>">
+                            <a title="List" class="px-2 py-0 btn btn-sm btn-outline-dark" href="<?= site_url() ?>point-pelanggaran/<?= $kar['id'] ?>">
                                 <i class="fa-fw fa-solid fa-list"></i>
                             </a>
                         </td>
                     </tr>
                 <?php endforeach; ?>
                 </tr>
+
             </tbody>
         </table>
     </div>
+
 </main>
 
 <?= $this->include('MyLayout/js') ?>

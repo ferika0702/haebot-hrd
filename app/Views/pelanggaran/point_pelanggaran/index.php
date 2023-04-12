@@ -7,16 +7,16 @@
 
     <div class="d-flex mb-0">
         <div class="me-auto mb-1">
-            <h3 style="color: #566573;">Log Absensi <?= ucwords(strtolower($karyawan_name))?>, <?=$tanggal_absen?></h3>
+            <h3 style="color: #566573;">Point Pelanggaran <?= $nama_karyawan ?></h3>
         </div>
         <div class="me-2 mb-1">
-            <a class="btn btn-sm btn-outline-dark" href="<?= site_url() ?>karyawan-absensi/<?=$karyawan_id?>">
+            <a class="btn btn-sm btn-outline-dark" href="<?= site_url() ?>pelanggaran-karyawan">
                 <i class="fa-fw fa-solid fa-arrow-left"></i> Kembali
             </a>
         </div>
         <div class="mb-1">
             <a class="btn btn-sm btn-outline-secondary mb-3" id="tombolTambah">
-                <i class="fa-fw fa-solid fa-plus"></i> Tambah Log Absensi
+                <i class="fa-fw fa-solid fa-plus"></i> Tambah Point Pelanggaran
             </a>
         </div>
     </div>
@@ -28,37 +28,29 @@
             <thead>
                 <tr>
                     <th class="text-center" width="5%">No</th>
-                    <th class="text-center" width="20%">Keterangan</th>
-                    <th class="text-center" width="30%">Waktu</th>
-                    <th class="text-center" width="15%">Aksi</th>
+                    <th class="text-center" width="20%">Tanggal</th>
+                    <th class="text-center" width="55%">Nama Pelanggaran</th>
+                    <th class="text-center" width="5%">Point</th>
+                    <th class="text-center" width="10%">Aksi</th>
                 </tr>
             </thead>
             <tbody>
             <?php $no = 1 ?>
-                <?php foreach ($log as $absen) : ?>
-                    <?php
-                    $day = date('l', strtotime($absen['log_date']));
-                    $days = array(
-                        'Sunday'    => 'Minggu',
-                        'Monday'    => 'Senin',
-                        'Tuesday'   => 'Selasa',
-                        'Wednesday' => 'Rabu',
-                        'Thursday'  => 'Kamis',
-                        'Friday'    => 'Jumat',
-                        'Saturday'  => 'Sabtu'
-                    );
-                    ?>
+            <?php $count = 100?>
+                <?php foreach ($point_pelanggaran as $point) : ?>
                     <tr>
-                        <td><?= $no++ ?></td>
-                        <td><?= $absen['keterangan'] ?></td>
-                        <td><?= $absen['log_time'] ?></td>
+                        <td class="text-center"><?= $no++ ?></td>
+                        <td class="text-center"><?= $point['tanggal'] ?></td>                        
+                        <td><?= $point['nama_pelanggaran'] ?></td>
+                        <td class="text-center"><?= $point['point'] ?></td>
                         <td class="text-center">
+
                             <form id="form_delete" method="POST" class="d-inline">
 
                                 <input type="hidden" name="_method" value="DELETE">
                             </form>
 
-                            <button onclick="confirm_delete(<?= $absen['id'] ?>)" title="Hapus" type="button" class="px-2 py-0 btn btn-sm btn-outline-danger">
+                            <button onclick="confirm_delete(<?= $point['id'] ?>)" title="Hapus" type="button" class="px-2 py-0 btn btn-sm btn-outline-danger">
                                 <i class="fa-fw fa-solid fa-trash"></i>
                             </button>
                         </td>
@@ -66,6 +58,11 @@
                 <?php endforeach; ?>
                 </tr>
             </tbody>
+            <tr>
+            <td colspan="5">
+                    Total Point Karyawan : <h4><?= $count-$total_point  ?> point</h4>
+                </td>
+            </tr>
         </table>
     </div>
 
@@ -79,11 +76,11 @@
     <div class="modal-dialog modal-lg modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="judulModal">Tambah Absensi</h1>
+                <h1 class="modal-title fs-5" id="judulModal">Tambah User</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
+            
             <div class="modal-body" id="isiForm">
-
             </div>
         </div>
     </div>
@@ -122,25 +119,25 @@
             })
         }
     });
-
-
+    
+    
     $('#tombolTambah').click(function(e) {
         e.preventDefault();
-        showModalTambah(<?=$id_absen?>);
+        showModalTambah(<?=$id_karyawan?>);
     })
     
 
     function showModalTambah(id) {
         $.ajax({
             type: 'POST',
-            url: '<?= site_url() ?>log-absen-new',
+            url: '<?= site_url() ?>point-pelanggaran/new',
             data: 'id='+id,
             dataType: 'json',
             success: function(res) {
                 if (res.data) {
                     $('#isiForm').html(res.data)
                     $('#my-modal').modal('toggle')
-                    $('#judulModal').html('Tambah Log Absensi')
+                    $('#judulModal').html('Tambah Point Pelanggaran')
                 }
             },
             error: function(e) {
@@ -152,6 +149,7 @@
 
     function confirm_delete(id) {
         Swal.fire({
+            backdrop: false,
             title: 'Konfirmasi?',
             text: "Apakah yakin menghapus!",
             icon: 'warning',
@@ -161,15 +159,13 @@
             confirmButtonText: 'Ya, hapus!'
         }).then((result) => {
             if (result.isConfirmed) {
-                $('#form_delete').attr('action', '<?= site_url() ?>log-absen/'+id);
+                $('#form_delete').attr('action', '<?= site_url() ?>point-pelanggaran-delete/'+id);
                 $('#form_delete').submit();
             }
         })
     }
     
-
+    
 </script>
-<script src="<?php echo base_url('js/time.js'); ?>"></script>
-
 
 <?= $this->endSection() ?>

@@ -1,12 +1,9 @@
 <form autocomplete="off" class="row g-3 mt-2" action="<?= site_url() ?>log-absen/create" method="POST" id="form">
     <?= csrf_field() ?>
-    <?php 
-    $today = date('Y-m-d');
-    ?>
     <div class="row mb-3">
         <label for="log_date" class="col-sm-3 col-form-label">Tanggal</label>
         <div class="col-sm-9">
-            <input value="<?php echo $today; ?>" type="text" class="form-control" id="log_date" name="log_date" autofocus>
+            <input value="<?= $tanggal_absen ?>" type="text" class="form-control" id="log_date" name="log_date" autofocus>
             <div class="invalid-feedback error-log_date"></div>
         </div>
     </div>

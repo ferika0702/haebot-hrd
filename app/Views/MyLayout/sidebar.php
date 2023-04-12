@@ -54,6 +54,15 @@
                 <?php endif; ?>
 
                 <?php if (has_permission('SDM')) : ?>
+                    <a class="nav-link" href="<?= base_url() ?>/menu-pelanggaran">
+                        <div class="sb-nav-link-icon">
+                            <i class="fa-fw fa-solid fa-clock-rotate-left"></i>
+                        </div>
+                        Poin Pelanggaran
+                    </a>
+                <?php endif; ?>
+
+                <?php if (has_permission('SDM')) : ?>
                     <a class="nav-link" href="<?= base_url() ?>/resign">
                         <div class="sb-nav-link-icon">
                             <i class="fa-fw fa-solid fa-folder-minus"></i>

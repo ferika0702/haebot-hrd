@@ -43,4 +43,6 @@ class AbsensiModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    
 }
