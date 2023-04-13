@@ -11,15 +11,14 @@
     </div>
     <form action="<?= site_url('view-absensi-filter') ?>" method="POST">
         <div class="d-flex mb-1">
-            <label class="me-2">Filter Tanggal:</label>
             <select name="bulan" id="bulan" class="form-select me-2">
-                <option value="">Pilih Bulan</option>
+                <option value="">Pilih Bulan (Semua Bulan)</option>
                 <?php for ($i = 1; $i <= 12; $i++) : ?>
                     <option value="<?= $i ?>"><?= date("F", strtotime("2001-$i-01")) ?></option>
                 <?php endfor; ?>
             </select>
             <select id="tahun"name="tahun" class="form-select me-2">
-                <option value="">Pilih Tahun</option>
+                <option value="">Pilih Tahun (Semua Tahun)</option>
                 <?php for ($i = date('Y'); $i >= 2020; $i--) : ?>
                     <option value="<?= $i ?>"><?= $i ?></option>
                 <?php endfor; ?>
