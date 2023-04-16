@@ -18,7 +18,6 @@ class DivisiList extends ResourceController
         $modelDivisi = new DivisiModel();
         $divisi = $modelDivisi->find($id_divisi);
         $karyawan = $modelKaryawanDivisi
-        // ->select('karyawan_divisi.id,karyawan.id_divisi,karyawan.id,karyawan.nama_lengkap, karyawan.jabatan, karyawan.pendidikan, karyawan.no_telp, karyawan.email')
         ->select('karyawan_divisi.id as id, k.id as id_karyawan, k.id_divisi,k.nama_lengkap, k.jabatan, k.pendidikan, k.no_telp, k.email')
         ->join('karyawan as k', 'k.id = karyawan_divisi.id_karyawan','LEFT')
         ->where('karyawan_divisi.id_divisi', $id_divisi)
@@ -29,7 +28,6 @@ class DivisiList extends ResourceController
             'nama_divisi' => $divisi['nama']
         ];
         return view('divisi/list/index', $data);
-        // var_dump($data);
     }
 
 

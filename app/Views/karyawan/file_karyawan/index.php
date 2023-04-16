@@ -2,16 +2,20 @@
 
 <?= $this->section('content') ?>
 
-
 <main class="p-md-3 p-2">
 
     <div class="d-flex mb-0">
         <div class="me-auto mb-1">
-            <h3 style="color: #566573;">Data Karyawan</h3>
+            <h3 style="color: #566573;">Data File Karyawan <?=$karyawan_name?></h3>
+        </div>
+        <div class="me-2 mb-1">
+            <a class="btn btn-sm btn-outline-dark" href="<?= site_url() ?>karyawan">
+                <i class="fa-fw fa-solid fa-arrow-left"></i> Kembali
+            </a>
         </div>
         <div class="mb-1">
-            <a class="btn btn-sm btn-outline-secondary mb-3" id="tombolTambah">
-                <i class="fa-fw fa-solid fa-plus"></i> Tambah Karyawan
+            <a class="btn btn-sm btn-outline-secondary mb-3" href="<?= site_url() ?>file-karyawan/new/<?=$id_karyawan?>">
+                <i class="fa-fw fa-solid fa-plus"></i> Tambah File
             </a>
         </div>
     </div>
@@ -23,34 +27,21 @@
             <thead>
                 <tr>
                     <th class="text-center" width="5%">No</th>
-                    <th class="text-center" width="25%">Nama</th>
-                    <th class="text-center" width="10%">Jabatan</th>
-                    <th class="text-center" width="10%">Pendidikan</th>
-                    <th class="text-center" width="10%">No Telepon</th>
-                    <th class="text-center" width="20%">Email</th>
-                    <th class="text-center" width="20%">Aksi</th>
+                    <th class="text-center" width="80%">Berkas</th>
+                    <th class="text-center" width="15%">Aksi</th>
                 </tr>
             </thead>
             <tbody>
                 <?php $no = 1 ?>
-                <?php foreach ($karyawan as $karyawan) : ?>
+                <?php foreach ($file as $file) : ?>
                     <tr>
                         <td><?= $no++ ?></td>
-                        <td><?= $karyawan['nama_lengkap'] ?></td>
-                        <td><?= $karyawan['jabatan'] ?></td>
-                        <td><?= $karyawan['pendidikan'] ?></td>
-                        <td><?= $karyawan['no_telp'] ?></td>
-                        <td><?= $karyawan['email'] ?></td>
+                        <td><?= $file['nama'] ?></td>
                         <td class="text-center">
-                            <a title="List" class="px-2 py-0 btn btn-sm btn-outline-dark" href="<?= site_url() ?>file-karyawan/<?= $karyawan['id'] ?>">
-                                <i class="fa-fw fa-regular fa-folder"></i>
-                            </a>
-
-                            <a title="Detail" class="px-2 py-0 btn btn-sm btn-outline-dark" onclick="showModalDetail(<?= $karyawan['id'] ?>)">
+                        <a title="Detail" class="px-2 py-0 btn btn-sm btn-outline-dark" onclick="showModalDetail(<?= $file['id'] ?>)">
                                 <i class="fa-fw fa-solid fa-magnifying-glass"></i>
                             </a>
-
-                            <a title="Edit" class="px-2 py-0 btn btn-sm btn-outline-primary" onclick="showModalEdit(<?= $karyawan['id'] ?>)">
+                        <a title="Edit" class="px-2 py-0 btn btn-sm btn-outline-primary"href="<?= site_url() ?>file-karyawan/edit/<?= $file['id'] ?>/<?=$id_karyawan?>">
                                 <i class="fa-fw fa-solid fa-pen"></i>
                             </a>
 
@@ -58,7 +49,8 @@
                                 <?= csrf_field() ?>
                                 <input type="hidden" name="_method" value="DELETE">
                             </form>
-                            <button onclick="confirm_delete(<?= $karyawan['id'] ?>)" title="Hapus" type="button" class="px-2 py-0 btn btn-sm btn-outline-danger"><i class="fa-fw fa-solid fa-trash"></i></button>
+                            <button onclick="confirm_delete(<?= $file['id'] ?>)" title="Hapus" type="button" class="px-2 py-0 btn btn-sm btn-outline-danger"><i class="fa-fw fa-solid fa-trash"></i></button>
+                        </td>
                         </td>
                     </tr>
                 <?php endforeach; ?>
@@ -71,12 +63,13 @@
 
 <?= $this->include('MyLayout/js') ?>
 
+
 <!-- Modal -->
 <div class="modal fade" id="my-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="judulModal"></h1>
+                <h1 class="modal-title fs-5" id="judulModal">Tambah user</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body" id="isiForm">
@@ -87,7 +80,9 @@
 </div>
 <!-- Modal -->
 
+
 <script>
+
     // Bahan Alert
     const Toast = Swal.mixin({
         toast: true,
@@ -103,6 +98,7 @@
             toast.addEventListener('mouseleave', Swal.resumeTimer)
         }
     })
+        
 
     $(document).ready(function() {
         $('#tabel').DataTable();
@@ -117,60 +113,16 @@
         }
     });
 
-    $('#tombolTambah').click(function(e) {
-        e.preventDefault();
-        showModalTambah();
-    })
-
-    function showModalTambah() {
-        $.ajax({
-            type: 'GET',
-            url: '<?= site_url() ?>karyawan/new',
-            dataType: 'json',
-            success: function(res) {
-                if (res.data) {
-                    $('#isiForm').html(res.data)
-                    $('#my-modal').modal('toggle')
-                    $('#judulModal').html('Tambah Karyawan')
-                }
-            },
-            error: function(e) {
-                alert('Error \n' + e.responseText);
-            }
-        })
-    }
-
-    function showModalEdit(id) {
-        $.ajax({
-            type: 'GET',
-            url: '<?= site_url() ?>karyawan/' + id + '/edit',
-            dataType: 'json',
-            success: function(res) {
-                if (res.data) {
-                    $('#isiForm').html(res.data)
-                    $('#my-modal').modal('toggle')
-                    $('#judulModal').html('Edit Karyawan')
-                    console.log(res.data)
-                } else {
-                    console.log("error")
-                }
-            },
-            error: function(e) {
-                alert('Error \n' + e.responseText);
-            }
-        })
-    }
-
     function showModalDetail(id) {
         $.ajax({
             type: 'GET',
-            url: '<?= site_url() ?>karyawan/' + id,
+            url: '<?= site_url() ?>file-karyawan/show/' + id,
             dataType: 'json',
             success: function(res) {
                 if (res.data) {
                     $('#isiForm').html(res.data)
                     $('#my-modal').modal('toggle')
-                    $('#judulModal').html('Detail Karyawan')
+                    $('#judulModal').html('Detail File')
                 }
             },
             error: function(e) {
@@ -190,7 +142,7 @@
             confirmButtonText: 'Ya, hapus!'
         }).then((result) => {
             if (result.isConfirmed) {
-                $('#form_delete').attr('action', '<?= site_url() ?>karyawan/' + id);
+                $('#form_delete').attr('action', '<?= site_url() ?>file-karyawan/delete/' + id);
                 $('#form_delete').submit();
             }
         })

@@ -10,7 +10,7 @@
         </div>
     </div>
     <form action="<?= site_url('view-absensi-filter') ?>" method="POST">
-        <div class="d-flex mb-1">
+        <div class="d-flex mb-3">
             <select name="bulan" id="bulan" class="form-select me-2">
                 <option value="">Pilih Bulan (Semua Bulan)</option>
                 <?php for ($i = 1; $i <= 12; $i++) : ?>
