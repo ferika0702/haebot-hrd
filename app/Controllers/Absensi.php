@@ -12,12 +12,6 @@ class Absensi extends ResourceController
 
     public function index()
     {
-        return view('absensi/index');
-    }
-
-
-    public function viewAbsensi()
-    {
         $modelKaryawan = new KaryawanModel();
         $modelKaryawanAbsen = new KaryawanAbsenModel();
         
@@ -37,11 +31,7 @@ class Absensi extends ResourceController
             $data['karyawan'][] = $row;
         }
 
-        return view('absensi/v_absensi', $data);
-    }
-
-    public function viewLaporan(){
-        return view('absensi/v_laporan');
+        return view('absensi/index', $data);
     }
 
     

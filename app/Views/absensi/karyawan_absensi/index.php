@@ -10,7 +10,7 @@
             <h3 style="color: #566573;">Absen Karyawan <?= ucwords(strtolower($karyawan_name)) ?></h3>
         </div>
         <div class="me-2 mb-1">
-            <a class="btn btn-sm btn-outline-dark" href="<?= site_url() ?>view-absensi">
+            <a class="btn btn-sm btn-outline-dark" href="<?= site_url() ?>absensi">
                 <i class="fa-fw fa-solid fa-arrow-left"></i> Kembali
             </a>
         </div>

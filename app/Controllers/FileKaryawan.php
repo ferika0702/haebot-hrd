@@ -4,7 +4,6 @@ namespace App\Controllers;
 use App\Models\KaryawanModel;
 use App\Models\FileKaryawanModel;
 use CodeIgniter\RESTful\ResourceController;
-// use CodeIgniter\Files\File;
 
 class FileKaryawan extends ResourceController
 {
