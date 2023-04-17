@@ -56,15 +56,15 @@ $routes->set404Override();
     //list
     $routes->get('list/(:num)', 'DivisiList::index/$1', ['filter' => 'permission:SDM']);
     $routes->get('detail-list/(:num)', 'DivisiList::show/$1', ['filter' => 'permission:SDM']);
-    $routes->post('list/create', 'DivisiList::create', ['filter' => 'permission:SDM']);
     $routes->get('list-new/(:num)', 'DivisiList::new/$1', ['filter' => 'permission:SDM']);
+    $routes->post('list/create', 'DivisiList::create', ['filter' => 'permission:SDM']);
     $routes->delete('list-delete/(:num)', 'DivisiList::delete/$1', ['filter' => 'permission:SDM']);
 
     
     //user-group
     $routes->get('user-group/(:num)', 'ListGroup::index/$1', ['filter' => 'permission:SDM']);
     $routes->post('group/create', 'ListGroup::create', ['filter' => 'permission:SDM']);
-    $routes->POST('group-new', 'ListGroup::new', ['filter' => 'permission:SDM']);
+    $routes->post('group-new', 'ListGroup::new', ['filter' => 'permission:SDM']);
     $routes->delete('group-delete/(:num)/(:num)', 'ListGroup::delete/$1/$2', ['filter' => 'permission:SDM']);
 
 
@@ -88,22 +88,50 @@ $routes->set404Override();
     $routes->get('group-permission-view', 'User::view_group_permission', ['filter' => 'permission:SDM']);
     $routes->resource('user', ['filter' => 'permission:SDM']);
 
+    
     //rekrutment
     $routes->resource('rekrutmen', ['filter' => 'permission:SDM']);
 
+    
     //absensi
-    $routes->get('view-absensi', 'Absensi::viewAbsensi', ['filter' => 'permission:SDM']);
-    $routes->get('view-laporan', 'Absensi::viewLaporan', ['filter' => 'permission:SDM']);
     $routes->resource('absensi', ['filter' => 'permission:SDM']);
     $routes->get('karyawan-absensi/(:num)', 'KaryawanAbsen::index/$1', ['filter' => 'permission:SDM']);
+    $routes->post('view-absensi-filter', 'Absensi::viewAbsensi', ['filter' => 'permission:SDM']);
     $routes->post('karyawan-absen-new', 'KaryawanAbsen::new', ['filter' => 'permission:SDM']);
     $routes->post('karyawan-absen/create', 'KaryawanAbsen::create', ['filter' => 'permission:SDM']);
+
 
     //log absen
     $routes->get('log-absensi/(:num)/(:num)', 'LogAbsen::index/$1/$2', ['filter' => 'permission:SDM']);
     $routes->post('log-absen-new', 'LogAbsen::new', ['filter' => 'permission:SDM']);
     $routes->post('log-absen/create', 'LogAbsen::create', ['filter' => 'permission:SDM']);
     $routes->delete('log-absen/(:num)', 'LogAbsen::delete/$1', ['filter' => 'permission:SDM']);
+
+
+    //pelanggaran
+    $routes->resource('pelanggaran', ['filter' => 'permission:SDM']);
+    
+
+    //pelanggaran karywan
+    $routes->get('pelanggaran-karyawan/', 'Pelanggaran::ViewKaryawan', ['filter' => 'permission:SDM']);
+    $routes->get('menu-pelanggaran/', 'Pelanggaran::ViewMenu', ['filter' => 'permission:SDM']);
+    
+
+    //point pelanggaran
+    $routes->get('point-pelanggaran/(:num)', 'PointPelanggaran::index/$1', ['filter' => 'permission:SDM']);
+    $routes->post('point-pelanggaran/new', 'PointPelanggaran::new', ['filter' => 'permission:SDM']);
+    $routes->post('point-pelanggaran/create', 'PointPelanggaran::create', ['filter' => 'permission:SDM']);
+    $routes->delete('point-pelanggaran-delete/(:num)', 'PointPelanggaran::delete/$1', ['filter' => 'permission:SDM']);
+
+
+    //file karyawan
+    $routes->get('file-karyawan/(:num)', 'FileKaryawan::index/$1', ['filter' => 'permission:SDM']);
+    $routes->get('file-karyawan/show/(:num)', 'FileKaryawan::show/$1', ['filter' => 'permission:SDM']);
+    $routes->get('file-karyawan/edit/(:num)/(:num)', 'FileKaryawan::edit/$1/$2', ['filter' => 'permission:SDM']);
+    $routes->get('file-karyawan/new/(:num)', 'FileKaryawan::new/$1', ['filter' => 'permission:SDM']);
+    $routes->post('tambah-file', 'FileKaryawan::create', ['filter' => 'permission:SDM']);
+    $routes->put('file-karyawan/update/(:num)', 'FileKaryawan::update/$1', ['filter' => 'permission:SDM']);
+    $routes->delete('file-karyawan/delete/(:num)', 'FileKaryawan::delete/$1', ['filter' => 'permission:SDM']);
     
 });
 

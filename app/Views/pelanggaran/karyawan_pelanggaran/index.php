@@ -5,9 +5,15 @@
 
 <main class="p-md-3 p-2">
 
+
     <div class="d-flex mb-0">
         <div class="me-auto mb-1">
-            <h3 style="color: #566573;">Absensi Karyawan</h3>
+            <h3 style="color: #566573;">Nama Karyawan</h3>
+        </div>
+        <div class="me-2 mb-1">
+            <a class="btn btn-sm btn-outline-dark" href="<?= site_url() ?>menu-pelanggaran">
+                <i class="fa-fw fa-solid fa-arrow-left"></i> Kembali
+            </a>
         </div>
     </div>
 
@@ -24,12 +30,12 @@
             </thead>
             <tbody>
                 <?php $no = 1 ?>
-                <?php foreach ($karyawan as $sp) : ?>
+                <?php foreach ($karyawan as $kar) : ?>
                     <tr>
                         <td><?= $no++ ?></td>
-                        <td><?= $sp['nama_lengkap'] ?></td>
+                        <td><?= $kar['nama_lengkap'] ?></td>
                         <td class="text-center">
-                            <a title="List" class="px-2 py-0 btn btn-sm btn-outline-dark" href="<?= site_url() ?>karyawan-absensi/<?= $sp['id'] ?>">
+                            <a title="List" class="px-2 py-0 btn btn-sm btn-outline-dark" href="<?= site_url() ?>point-pelanggaran/<?= $kar['id'] ?>">
                                 <i class="fa-fw fa-solid fa-list"></i>
                             </a>
                         </td>

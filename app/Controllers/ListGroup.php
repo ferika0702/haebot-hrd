@@ -51,7 +51,6 @@ class ListGroup extends ResourceController
                 'id_group' => $this->request->getPost('id'),
                 'user'   => $user,
             ];
-            // var_dump($user);
 
             $json = [
                 'data'          => view('user/group/add', $data),
@@ -131,5 +130,4 @@ class ListGroup extends ResourceController
         return redirect()->back();
     }
 
-    
 }

@@ -4,10 +4,10 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class KaryawanAbsenModel extends Model
+class PointPelanggaranModel extends Model
 {
     protected $DBGroup          = 'default';
-    protected $table            = 'karyawan_absen';
+    protected $table            = 'point_pelanggaran';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $insertID         = 0;
@@ -15,7 +15,7 @@ class KaryawanAbsenModel extends Model
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
     protected $allowedFields    = [
-        'id_karyawan','tanggal_absen','status','total_menit'
+        'id_karyawan','id_pelanggaran','point','tanggal'
     ];
 
     // Dates
@@ -41,22 +41,4 @@ class KaryawanAbsenModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
-
-    public function total_menit($id_karyawan, $bulan, $tahun)
-    {
-        $this->selectSum('total_menit');
-        $this->where('id_karyawan', $id_karyawan);
-        
-        // Menambahkan kondisi bulan dan tahun pada query
-        if (!empty($bulan)) {
-            $this->where('MONTH(tanggal_absen)', $bulan);
-        }
-        if (!empty($tahun)) {
-            $this->where('YEAR(tanggal_absen)', $tahun);
-        }
-        
-        $query = $this->get();
-        return $query->getRow()->total_menit;
-    }
-
 }

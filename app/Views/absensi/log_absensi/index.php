@@ -66,12 +66,6 @@
                 <?php endforeach; ?>
                 </tr>
             </tbody>
-            <tr>
-            <td colspan="4">
-                    Total Menit Masuk Karyawan : <h4><?= $total ?> menit</h4>
-                </td>
-            </tr>
-            <tr>
         </table>
     </div>
 

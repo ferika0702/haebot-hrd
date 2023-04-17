@@ -7,11 +7,16 @@
 
     <div class="d-flex mb-0">
         <div class="me-auto mb-1">
-            <h3 style="color: #566573;">Data Karyawan</h3>
+            <h3 style="color: #566573;">List Pelanggaran</h3>
+        </div>
+        <div class="me-2 mb-1">
+            <a class="btn btn-sm btn-outline-dark" href="<?= site_url() ?>menu-pelanggaran">
+                <i class="fa-fw fa-solid fa-arrow-left"></i> Kembali
+            </a>
         </div>
         <div class="mb-1">
             <a class="btn btn-sm btn-outline-secondary mb-3" id="tombolTambah">
-                <i class="fa-fw fa-solid fa-plus"></i> Tambah Karyawan
+                <i class="fa-fw fa-solid fa-plus"></i> Tambah Pelanggaran
             </a>
         </div>
     </div>
@@ -23,34 +28,21 @@
             <thead>
                 <tr>
                     <th class="text-center" width="5%">No</th>
-                    <th class="text-center" width="25%">Nama</th>
-                    <th class="text-center" width="10%">Jabatan</th>
-                    <th class="text-center" width="10%">Pendidikan</th>
-                    <th class="text-center" width="10%">No Telepon</th>
-                    <th class="text-center" width="20%">Email</th>
-                    <th class="text-center" width="20%">Aksi</th>
+                    <th class="text-center" width="60%">Nama Pelanggaran</th>
+                    <th class="text-center" width="15%">Range Point</th>
+                    <th class="text-center" width="10%">Aksi</th>
                 </tr>
             </thead>
             <tbody>
                 <?php $no = 1 ?>
-                <?php foreach ($karyawan as $karyawan) : ?>
+                <?php foreach ($pelanggaran as $plg) : ?>
                     <tr>
                         <td><?= $no++ ?></td>
-                        <td><?= $karyawan['nama_lengkap'] ?></td>
-                        <td><?= $karyawan['jabatan'] ?></td>
-                        <td><?= $karyawan['pendidikan'] ?></td>
-                        <td><?= $karyawan['no_telp'] ?></td>
-                        <td><?= $karyawan['email'] ?></td>
+                        <td><?= $plg['nama_pelanggaran'] ?></td>
+                        <td><?= $plg['range_point'] ?></td>
                         <td class="text-center">
-                            <a title="List" class="px-2 py-0 btn btn-sm btn-outline-dark" href="<?= site_url() ?>file-karyawan/<?= $karyawan['id'] ?>">
-                                <i class="fa-fw fa-regular fa-folder"></i>
-                            </a>
 
-                            <a title="Detail" class="px-2 py-0 btn btn-sm btn-outline-dark" onclick="showModalDetail(<?= $karyawan['id'] ?>)">
-                                <i class="fa-fw fa-solid fa-magnifying-glass"></i>
-                            </a>
-
-                            <a title="Edit" class="px-2 py-0 btn btn-sm btn-outline-primary" onclick="showModalEdit(<?= $karyawan['id'] ?>)">
+                            <a title="Edit" class="px-2 py-0 btn btn-sm btn-outline-primary" onclick="showModalEdit(<?= $plg['id'] ?>)">
                                 <i class="fa-fw fa-solid fa-pen"></i>
                             </a>
 
@@ -58,7 +50,7 @@
                                 <?= csrf_field() ?>
                                 <input type="hidden" name="_method" value="DELETE">
                             </form>
-                            <button onclick="confirm_delete(<?= $karyawan['id'] ?>)" title="Hapus" type="button" class="px-2 py-0 btn btn-sm btn-outline-danger"><i class="fa-fw fa-solid fa-trash"></i></button>
+                            <button onclick="confirm_delete(<?= $plg['id'] ?>)" title="Hapus" type="button" class="px-2 py-0 btn btn-sm btn-outline-danger"><i class="fa-fw fa-solid fa-trash"></i></button>
                         </td>
                     </tr>
                 <?php endforeach; ?>
@@ -125,13 +117,13 @@
     function showModalTambah() {
         $.ajax({
             type: 'GET',
-            url: '<?= site_url() ?>karyawan/new',
+            url: '<?= site_url() ?>pelanggaran/new',
             dataType: 'json',
             success: function(res) {
                 if (res.data) {
                     $('#isiForm').html(res.data)
                     $('#my-modal').modal('toggle')
-                    $('#judulModal').html('Tambah Karyawan')
+                    $('#judulModal').html('Tambah Pelanggaran')
                 }
             },
             error: function(e) {
@@ -143,13 +135,13 @@
     function showModalEdit(id) {
         $.ajax({
             type: 'GET',
-            url: '<?= site_url() ?>karyawan/' + id + '/edit',
+            url: '<?= site_url() ?>pelanggaran/' + id + '/edit',
             dataType: 'json',
             success: function(res) {
                 if (res.data) {
                     $('#isiForm').html(res.data)
                     $('#my-modal').modal('toggle')
-                    $('#judulModal').html('Edit Karyawan')
+                    $('#judulModal').html('Edit Pelanggaran')
                     console.log(res.data)
                 } else {
                     console.log("error")
@@ -161,23 +153,6 @@
         })
     }
 
-    function showModalDetail(id) {
-        $.ajax({
-            type: 'GET',
-            url: '<?= site_url() ?>karyawan/' + id,
-            dataType: 'json',
-            success: function(res) {
-                if (res.data) {
-                    $('#isiForm').html(res.data)
-                    $('#my-modal').modal('toggle')
-                    $('#judulModal').html('Detail Karyawan')
-                }
-            },
-            error: function(e) {
-                alert('Error \n' + e.responseText);
-            }
-        })
-    }
 
     function confirm_delete(id) {
         Swal.fire({
@@ -190,7 +165,7 @@
             confirmButtonText: 'Ya, hapus!'
         }).then((result) => {
             if (result.isConfirmed) {
-                $('#form_delete').attr('action', '<?= site_url() ?>karyawan/' + id);
+                $('#form_delete').attr('action', '<?= site_url() ?>pelanggaran/' + id);
                 $('#form_delete').submit();
             }
         })

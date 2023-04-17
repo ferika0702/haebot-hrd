@@ -104,19 +104,19 @@
     })
 
 
-    // $(document).ready(function() {
+    $(document).ready(function() {
 
-    //     $('#tabel').DataTable();
+        $('#tabel').DataTable();
 
-    //     // Alert
-    //     var op = <?= (!empty(session()->getFlashdata('pesan')) ? json_encode(session()->getFlashdata('pesan')) : '""'); ?>;
-    //     if (op != '') {
-    //         Toast.fire({
-    //             icon: 'success',
-    //             title: op
-    //         })
-    //     }
-    // });
+        // Alert
+        var op = <?= (!empty(session()->getFlashdata('pesan')) ? json_encode(session()->getFlashdata('pesan')) : '""'); ?>;
+        if (op != '') {
+            Toast.fire({
+                icon: 'success',
+                title: op
+            })
+        }
+    });
 
 
     function confirm_delete(id) {

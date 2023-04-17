@@ -14,7 +14,7 @@ class KaryawanAbsen extends ResourceController
         $modelKaryawanAbsen = new KaryawanAbsenModel();
         $karyawan = $modelKaryawan->find($id_karyawan);
         $absen=$modelKaryawanAbsen
-            ->select('karyawan_absen.id as ka_id,karyawan_absen.id_karyawan,karyawan_absen.tanggal_absen,karyawan_absen.status,karyawan.nama_lengkap,karyawan.id as karyawan_id')
+            ->select('karyawan_absen.id as ka_id,karyawan_absen.id_karyawan,karyawan_absen.tanggal_absen,karyawan_absen.status,karyawan.nama_lengkap,karyawan.id as karyawan_id,karyawan_absen.total_menit')
             ->join('karyawan', 'karyawan_absen.id_karyawan = karyawan.id')
             ->where('karyawan_absen.id_karyawan',$id_karyawan)
             ->findAll();
