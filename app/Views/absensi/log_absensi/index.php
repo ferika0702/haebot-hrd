@@ -7,10 +7,10 @@
 
     <div class="d-flex mb-0">
         <div class="me-auto mb-1">
-            <h3 style="color: #566573;">Log Absensi <?= ucwords(strtolower($karyawan_name))?>, <?=$tanggal_absen?></h3>
+            <h3 style="color: #566573;">Log Absensi <?= ucwords(strtolower($karyawan_name)) ?>, <?= $tanggal_absen ?></h3>
         </div>
         <div class="me-2 mb-1">
-            <a class="btn btn-sm btn-outline-dark" href="<?= site_url() ?>karyawan-absensi/<?=$karyawan_id?>">
+            <a class="btn btn-sm btn-outline-dark" href="<?= site_url() ?>karyawan-absensi/<?= $karyawan_id ?>">
                 <i class="fa-fw fa-solid fa-arrow-left"></i> Kembali
             </a>
         </div>
@@ -28,13 +28,13 @@
             <thead>
                 <tr>
                     <th class="text-center" width="5%">No</th>
-                    <th class="text-center" width="20%">Keterangan</th>
-                    <th class="text-center" width="30%">Waktu</th>
-                    <th class="text-center" width="15%">Aksi</th>
+                    <th class="text-center" width="40%">Keterangan</th>
+                    <th class="text-center" width="45%">Waktu</th>
+                    <th class="text-center" width="10%">Aksi</th>
                 </tr>
             </thead>
             <tbody>
-            <?php $no = 1 ?>
+                <?php $no = 1 ?>
                 <?php foreach ($log as $absen) : ?>
                     <?php
                     $day = date('l', strtotime($absen['log_date']));
@@ -92,7 +92,6 @@
 
 
 <script>
-
     // Bahan Alert
     const Toast = Swal.mixin({
         toast: true,
@@ -108,7 +107,7 @@
             toast.addEventListener('mouseleave', Swal.resumeTimer)
         }
     })
-        
+
 
     $(document).ready(function() {
         $('#tabel').DataTable();
@@ -126,15 +125,15 @@
 
     $('#tombolTambah').click(function(e) {
         e.preventDefault();
-        showModalTambah(<?=$id_absen?>);
+        showModalTambah(<?= $id_absen ?>);
     })
-    
+
 
     function showModalTambah(id) {
         $.ajax({
             type: 'POST',
             url: '<?= site_url() ?>log-absen-new',
-            data: 'id='+id,
+            data: 'id=' + id,
             dataType: 'json',
             success: function(res) {
                 if (res.data) {
@@ -161,13 +160,11 @@
             confirmButtonText: 'Ya, hapus!'
         }).then((result) => {
             if (result.isConfirmed) {
-                $('#form_delete').attr('action', '<?= site_url() ?>log-absen/'+id);
+                $('#form_delete').attr('action', '<?= site_url() ?>log-absen/' + id);
                 $('#form_delete').submit();
             }
         })
     }
-    
-
 </script>
 <script src="<?php echo base_url('js/time.js'); ?>"></script>
 

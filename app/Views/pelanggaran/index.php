@@ -27,10 +27,10 @@
         <table class="table table-hover table-striped table-bordered" width="100%" id="tabel">
             <thead>
                 <tr>
-                    <th class="text-center" width="5%">No</th>
-                    <th class="text-center" width="60%">Nama Pelanggaran</th>
-                    <th class="text-center" width="15%">Range Point</th>
-                    <th class="text-center" width="10%">Aksi</th>
+                    <th class="text-center" width="4%">No</th>
+                    <th class="text-center" width="78%">Nama Pelanggaran</th>
+                    <th class="text-center" width="10%">Range Point</th>
+                    <th class="text-center" width="8%">Aksi</th>
                 </tr>
             </thead>
             <tbody>

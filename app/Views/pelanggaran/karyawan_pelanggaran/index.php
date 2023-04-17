@@ -24,8 +24,8 @@
             <thead>
                 <tr>
                     <th class="text-center" width="5%">No</th>
-                    <th class="text-center" width="35%">Nama Karyawan</th>
-                    <th class="text-center" width="15%">Aksi</th>
+                    <th class="text-center" width="87%">Nama Karyawan</th>
+                    <th class="text-center" width="8%">Aksi</th>
                 </tr>
             </thead>
             <tbody>
@@ -73,7 +73,6 @@
 
         $('#tabel').DataTable();
     });
-
 </script>
 
 <?= $this->endSection() ?>

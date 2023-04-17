@@ -6,14 +6,12 @@
 <main class="p-md-3 p-2">
 
     <div class="d-flex mb-0">
-        <div class="me-auto mb-1">
+        <div class="me-auto ">
             <h3 style="color: #566573;">Data Karyawan</h3>
         </div>
-        <div class="mb-1">
-            <a class="btn btn-sm btn-outline-secondary mb-3" id="tombolTambah">
-                <i class="fa-fw fa-solid fa-plus"></i> Tambah Karyawan
-            </a>
-        </div>
+        <a class="btn btn-sm btn-outline-secondary mb-3" id="tombolTambah">
+            <i class="fa-fw fa-solid fa-plus"></i> Tambah Karyawan
+        </a>
     </div>
 
     <hr class="mt-0 mb-4">

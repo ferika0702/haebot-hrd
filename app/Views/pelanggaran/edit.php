@@ -5,16 +5,16 @@
     <input type="hidden" name="_method" value="PUT">
 
     <div class="row mb-3">
-        <label for="nama_pelanggaran" class="col-sm-3 col-form-label">Nama Pelanggaran</label>
-        <div class="col-sm-9">
-            <input type="text" class="form-control" id="nama_pelanggaran" name="nama_pelanggaran" value="<?= $pelanggaran['nama_pelanggaran']; ?>">                
+        <label for="nama_pelanggaran" class="col-sm-4 col-form-label">Nama Pelanggaran</label>
+        <div class="col-sm-8">
+            <input type="text" class="form-control" id="nama_pelanggaran" name="nama_pelanggaran" value="<?= $pelanggaran['nama_pelanggaran']; ?>">
             <div class="invalid-feedback error-nama_pelanggaran"></div>
         </div>
     </div>
-        
+
     <div class="row mb-3">
-        <label for="range_point" class="col-sm-3 col-form-label">Range Point Pelanggaran</label>
-        <div class="col-sm-9">
+        <label for="range_point" class="col-sm-4 col-form-label">Range Point Pelanggaran</label>
+        <div class="col-sm-8">
             <input type="text" class="form-control" id="range_point" name="range_point" value="<?= $pelanggaran['range_point']; ?>">
             <div class="invalid-feedback error-range_point"></div>
         </div>

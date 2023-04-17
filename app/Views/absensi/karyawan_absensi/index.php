@@ -28,16 +28,16 @@
             <thead>
                 <tr>
                     <th class="text-center" width="5%">No</th>
-                    <th class="text-center" width="40%">Tanggal</th>
-                    <th class="text-center" width="20%">Status</th>
-                    <th class="text-center" width="20%">Total Menit</th>
-                    <th class="text-center" width="15%">Aksi</th>
+                    <th class="text-center" width="55%">Tanggal</th>
+                    <th class="text-center" width="15%">Status</th>
+                    <th class="text-center" width="15%">Total Menit</th>
+                    <th class="text-center" width="10%">Aksi</th>
                 </tr>
             </thead>
-            <tbody>   
-            <?php $no = 1 ?>
-            <?php ?>
-            <?php foreach ($absen as $absen) : ?>             
+            <tbody>
+                <?php $no = 1 ?>
+                <?php ?>
+                <?php foreach ($absen as $absen) : ?>
                     <tr>
                         <td><?= $no++ ?></td>
                         <?php
@@ -50,27 +50,27 @@
                             'Thursday'  => 'Kamis',
                             'Friday'    => 'Jumat',
                             'Saturday'  => 'Sabtu'
-                            );
-                            ?>   
-                        
-                        <td><?= $days[$day],', ',$absen['tanggal_absen'] ?></td>
+                        );
+                        ?>
+
+                        <td><?= $days[$day], ', ', $absen['tanggal_absen'] ?></td>
                         <td><?= $absen['status'] ?></td>
-                        <td><?= $absen['total_menit'] ,' ','Menit' ?></td>
+                        <td><?= $absen['total_menit'], ' ', 'Menit' ?></td>
                         <td class="text-center">
                             <form id="form_delete" method="POST" class="d-inline">
                                 <input type="hidden" name="_method" value="DELETE">
                             </form>
                             <button onclick="confirm_delete()" title="Hapus" type="button" class="px-2 py-0 btn btn-sm btn-outline-danger">
-                            <i class="fa-fw fa-solid fa-trash"></i>
-                        </button>
+                                <i class="fa-fw fa-solid fa-trash"></i>
+                            </button>
                             <?php if ($absen['status'] == 'MASUK') : ?>
                                 <a title="Log" class="px-2 py-0 btn btn-sm btn-outline-dark" href="<?= site_url() ?>log-absensi/<?= $karyawan_id['id'] ?>/<?= $absen['ka_id'] ?>">
                                     <i class="fa-fw fa-regular fa-clipboard"></i>
                                 </a>
                             <?php else : ?>
                                 <a title="Log" class="px-2 py-0 btn btn-sm btn-outline-dark">
-                                <i class="fa-fw fa-regular fa-clipboard" onclick="showAlert()"></i>
-                            <?php endif; ?>
+                                    <i class="fa-fw fa-regular fa-clipboard" onclick="showAlert()"></i>
+                                <?php endif; ?>
                         </td>
                     </tr>
                 <?php endforeach; ?>
@@ -102,7 +102,6 @@
 
 
 <script>
-
     // Bahan Alert
     const Toast = Swal.mixin({
         toast: true,
@@ -118,7 +117,7 @@
             toast.addEventListener('mouseleave', Swal.resumeTimer)
         }
     })
-        
+
 
     $(document).ready(function() {
         $('#tabel').DataTable();
@@ -136,15 +135,15 @@
 
     $('#tombolTambah').click(function(e) {
         e.preventDefault();
-        showModalTambah(<?=$id_karyawan?>);
+        showModalTambah(<?= $id_karyawan ?>);
     })
-    
+
 
     function showModalTambah(id) {
         $.ajax({
             type: 'POST',
             url: '<?= site_url() ?>karyawan-absen-new',
-            data: 'id='+id,
+            data: 'id=' + id,
             dataType: 'json',
             success: function(res) {
                 if (res.data) {
@@ -165,7 +164,7 @@
             title: 'Oops...',
             text: 'Yang bisa mengkakses halaman log absensi hanya karyawan dengan status masuk saja!',
         });
-        }
+    }
 </script>
 
 <?= $this->endSection() ?>
