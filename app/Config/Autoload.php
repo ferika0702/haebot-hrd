@@ -43,7 +43,7 @@ class Autoload extends AutoloadConfig
         APP_NAMESPACE           => APPPATH, // For custom app namespace
         'Config'                => APPPATH . 'Config',
         'PHPSQLParser'          => APPPATH . 'ThirdParty/php-sql-parser/src/PHPSQLParser', // <-- namespace for php-sql-parser
-        'Hermawan\DataTables'   => APPPATH . 'ThirdParty/codeigniter4-datatables/src', // <-- namespace for this library
+        'Hermawan\DataTables'   => APPPATH . 'ThirdParty/hermawandatatable/src', // <-- namespace for this library
     ];
 
     /**
