@@ -9,6 +9,7 @@
     <meta name="author" content="" />
     <title>Haebot</title>
 
+    <base href="<?= base_url('assets') ?>">
     <?= $this->include('MyLayout/css') ?>
 </head>
 
@@ -17,8 +18,8 @@
     <!-- NAVBAR -->
     <nav class="sb-topnav navbar navbar-expand navbar-dark" style="background-color: #0C5BC6;">
         <!-- Navbar Brand-->
-        <a class="navbar-brand ps-3" href="<?= site_url('/beranda') ?>">
-            <img src="<?= base_url('assets/logo/logo-haebot.jpeg') ?>" class="rounded-circle me-2" width="19%" alt="logo">
+        <a class="navbar-brand ps-3" href="/beranda">
+            <img src="assets/logo/logo-haebot.jpeg" class="rounded-circle me-2" width="19%" alt="logo">
             <b> Haebot Store </b>
         </a>
 

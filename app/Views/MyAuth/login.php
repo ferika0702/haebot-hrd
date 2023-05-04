@@ -12,9 +12,9 @@
     <!-- <link href="css/styles.css" rel="stylesheet" />
     <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script> -->
 
-    <link href="<?= base_url() ?>/template/css/styles.css" rel="stylesheet" />
+    <link href="<?= base_url() ?>template/css/styles.css" rel="stylesheet" />
 
-    <script src="<?= base_url() ?>/template/js/font-awesome-all.js" crossorigin="anonymous"></script>
+    <script src="<?= base_url() ?>template/js/font-awesome-all.js" crossorigin="anonymous"></script>
 </head>
 
 <body class="bg-primary">
@@ -77,8 +77,11 @@
 
                                         <hr class="mt-4">
 
-                                        <div class="d-flex align-items-center justify-content-between mt-4 mb-2">
-                                            <button type="submit" class="btn btn-primary btn-block"><?= lang('Auth.loginAction') ?></button>
+                                        <div class="row justify-content-between px-5">
+                                            <a class="text-decoration-none d-inline btn btn-outline-danger col-md-3" href="http://34.101.151.59/hbc-erp/">
+                                                <i class="fa-solid fa-arrow-left"></i> Beranda
+                                            </a>
+                                            <button type="submit" class="btn btn-outline-primary col-md-3"><?= lang('Auth.loginAction') ?> <i class="fa-solid fa-arrow-right"></i></button>
                                         </div>
 
 
@@ -110,8 +113,8 @@
 
 
 
-    <script src="<?= base_url() ?>/template/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-    <script src="<?= base_url() ?>/template/js/scripts.js"></script>
+    <script src="<?= base_url() ?>template/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <script src="<?= base_url() ?>template/js/scripts.js"></script>
     <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="js/scripts.js"></script> -->
 </body>
