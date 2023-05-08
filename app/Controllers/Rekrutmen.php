@@ -73,12 +73,14 @@ class Rekrutmen extends ResourceController
                         'required' => 'nama lengkap harus diisi',
                     ]
                 ],
-                'no_telp'  => [
-                    'rules'     => 'required',
-                    'errors'    => [
-                        'required' => 'no telepon harus diisi',
+                'no_telp' => [
+                    'rules'  => 'required|min_length[11]|numeric',
+                    'errors' => [
+                        'required'    => 'No telepon harus diisi dan minimal 11 angka',
+                        'min_length'  => 'Minimal harus 11 angka',
+                        'numeric'     => 'No telepon hanya boleh diisi dengan angka 0-9'
                     ]
-                ],
+                ], 
             ];
 
             if (!$this->validate($validasi)) {
@@ -149,10 +151,12 @@ class Rekrutmen extends ResourceController
                     'required' => 'nama lengkap harus diisi',
                 ]
             ],
-            'no_telp'  => [
-                'rules'     => 'required',
-                'errors'    => [
-                    'required' => 'no telepon harus diisi',
+            'no_telp' => [
+                'rules'  => 'required|min_length[11]|numeric',
+                'errors' => [
+                    'required'    => 'No telepon harus diisi dan minimal 11 angka',
+                    'min_length'  => 'Minimal harus 11 angka',
+                    'numeric'     => 'No telepon hanya boleh diisi dengan angka 0-9'
                 ]
             ],
         ];
@@ -163,6 +167,7 @@ class Rekrutmen extends ResourceController
             $error = [
                 'error_nama' => $validation->getError('nama'),
                 'error_no_telp' => $validation->getError('no_telp'),
+                'error_email' => $validation->getError('email'),
             ];
 
             $json = [

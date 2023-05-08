@@ -128,17 +128,20 @@ class Karyawan extends ResourceController
                         'required' => 'pendidikan harus diisi',
                     ]
                 ],
-                'no_telp'  => [
-                    'rules'     => 'required|min_length[11]',
-                    'errors'    => [
-                        'required' => 'no telepon harus diisi dan minimal 11 angka',
-                        'min_length' =>'minimal harus 11 angka'
+                'no_telp' => [
+                    'rules'  => 'required|min_length[11]|numeric',
+                    'errors' => [
+                        'required'    => 'No telepon harus diisi dan minimal 11 angka',
+                        'min_length'  => 'Minimal harus 11 angka',
+                        'numeric'     => 'No telepon hanya boleh diisi dengan angka 0-9'
                     ]
-                ],
+                ],                
                 'email'  => [
                     'rules'     => 'required|valid_email|is_unique[karyawan.email]',
                     'errors'    => [
                         'required' => 'email harus diisi',
+                        'valid_email'=>'Email Harus Valid',
+                        'is_unique'=>'Email tidak boleh sama',
                     ]
                 ],
                 'username'  => [
@@ -299,17 +302,20 @@ class Karyawan extends ResourceController
                     'required' => 'pendidikan harus diisi',
                 ]
             ],
-            'no_telp'  => [
-                'rules'     => 'required|min_length[11]',
-                'errors'    => [
-                    'required' => 'no telepon harus diisi dan minimal 11 angka',
-                    'min_length' =>'minimal harus 11 angka'
+            'no_telp' => [
+                'rules'  => 'required|min_length[11]|numeric',
+                'errors' => [
+                    'required'    => 'No telepon harus diisi dan minimal 11 angka',
+                    'min_length'  => 'Minimal harus 11 angka',
+                    'numeric'     => 'No telepon hanya boleh diisi dengan angka 0-9'
                 ]
-            ],
+            ], 
             'email'  => [
-                'rules'     => 'required|valid_email',
+                'rules'     => 'required|valid_email|is_unique[karyawan.email]',
                 'errors'    => [
                     'required' => 'email harus diisi',
+                    'valid_email'=>'Email Harus Valid',
+                    'is_unique'=>'Email tidak boleh sama',
                 ]
             ],
         ];
