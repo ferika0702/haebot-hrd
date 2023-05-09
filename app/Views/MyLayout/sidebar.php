@@ -9,7 +9,7 @@
                 <?php endif; ?>
 
                 <?php if (has_permission('Dashboard')) : ?>
-                    <a class="nav-link" href="<?= base_url() ?>dashboard">
+                    <a class="nav-link" href="<?= site_url() ?>dashboard">
                         <div class="sb-nav-link-icon">
                             <i class="fa-fw fa-solid fa-gauge"></i>
                         </div>
@@ -18,7 +18,7 @@
                 <?php endif; ?>
 
                 <?php if (has_permission('SDM')) : ?>
-                    <a class="nav-link" href="<?= base_url() ?>karyawan">
+                    <a class="nav-link" href="<?= site_url() ?>karyawan">
                         <div class="sb-nav-link-icon">
                             <i class="fa-fw fa-solid fa-user"></i>
                         </div>
@@ -27,7 +27,7 @@
                 <?php endif; ?>
 
                 <?php if (has_permission('SDM')) : ?>
-                    <a class="nav-link" href="<?= base_url() ?>absensi">
+                    <a class="nav-link" href="<?= site_url() ?>absensi">
                         <div class="sb-nav-link-icon">
                             <i class="fa-fw fa-solid fa-user-clock"></i>
                         </div>
@@ -36,7 +36,7 @@
                 <?php endif; ?>
 
                 <?php if (has_permission('SDM')) : ?>
-                    <a class="nav-link" href="<?= base_url() ?>divisi">
+                    <a class="nav-link" href="<?= site_url() ?>divisi">
                         <div class="sb-nav-link-icon">
                             <i class="fa-fw fa-solid fa-network-wired"></i>
                         </div>
@@ -45,7 +45,7 @@
                 <?php endif; ?>
 
                 <?php if (has_permission('SDM')) : ?>
-                    <a class="nav-link" href="<?= base_url() ?>rekrutmen">
+                    <a class="nav-link" href="<?= site_url() ?>rekrutmen">
                         <div class="sb-nav-link-icon">
                             <i class="fa-fw fa-solid fa-folder-plus"></i>
                         </div>
@@ -54,7 +54,7 @@
                 <?php endif; ?>
 
                 <?php if (has_permission('SDM')) : ?>
-                    <a class="nav-link" href="<?= base_url() ?>menu-pelanggaran">
+                    <a class="nav-link" href="<?= site_url() ?>menu-pelanggaran">
                         <div class="sb-nav-link-icon">
                             <i class="fa-fw fa-solid fa-clock-rotate-left"></i>
                         </div>
@@ -63,7 +63,7 @@
                 <?php endif; ?>
 
                 <?php if (has_permission('SDM')) : ?>
-                    <a class="nav-link" href="<?= base_url() ?>resign">
+                    <a class="nav-link" href="<?= site_url() ?>resign">
                         <div class="sb-nav-link-icon">
                             <i class="fa-fw fa-solid fa-folder-minus"></i>
                         </div>
@@ -72,7 +72,7 @@
                 <?php endif; ?>
 
                 <?php if (has_permission('SDM')) : ?>
-                    <a class="nav-link" href="<?= base_url() ?>mutasi">
+                    <a class="nav-link" href="<?= site_url() ?>mutasi">
                         <div class="sb-nav-link-icon">
                             <i class="fa-fw fa-solid fa-right-left"></i>
                         </div>
@@ -81,7 +81,7 @@
                 <?php endif; ?>
 
                 <?php if (has_permission('SDM')) : ?>
-                    <a class="nav-link" href="<?= base_url() ?>user">
+                    <a class="nav-link" href="<?= site_url() ?>user">
                         <div class="sb-nav-link-icon">
                             <i class="fa-fw fa-solid fa-gear"></i>
                         </div>

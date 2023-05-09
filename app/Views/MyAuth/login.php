@@ -12,9 +12,9 @@
     <!-- <link href="css/styles.css" rel="stylesheet" />
     <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script> -->
 
-    <link href="<?= base_url() ?>template/css/styles.css" rel="stylesheet" />
+    <link href="<?= base_url() ?>/template/css/styles.css" rel="stylesheet" />
 
-    <script src="<?= base_url() ?>template/js/font-awesome-all.js" crossorigin="anonymous"></script>
+    <script src="<?= base_url() ?>/template/js/font-awesome-all.js" crossorigin="anonymous"></script>
 </head>
 
 <body class="bg-primary">
@@ -26,7 +26,7 @@
                         <div class="col-lg-5">
                             <div class="card shadow-lg border-0 rounded-lg mt-5">
                                 <div class="card-header">
-                                    <!-- <img src="<?= base_url() ?>assets/logo/logo-haebot.jpg" alt=""> -->
+                                    <!-- <img src="<?= base_url() ?>/assets/logo/logo-haebot.jpg" alt=""> -->
                                     <!-- <h3 class="text-center font-weight-light my-4">Login</h3> -->
                                     <h3 class="text-center font-weight-light my-3"> <b class="text-secondary"> HRD </b> <br> <?= lang('Auth.loginTitle') ?> </h3>
                                 </div>
@@ -113,8 +113,8 @@
 
 
 
-    <script src="<?= base_url() ?>template/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-    <script src="<?= base_url() ?>template/js/scripts.js"></script>
+    <script src="<?= base_url() ?>/template/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <script src="<?= base_url() ?>/template/js/scripts.js"></script>
     <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="js/scripts.js"></script> -->
 </body>
